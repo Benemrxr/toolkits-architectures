@@ -1,6 +1,9 @@
 # Milestone 2: Group Marxer, Kotatis, Rohrer
 This report documents our progress for the second milestone.
 
+### Before we get started:
+We set up a new project repository with a clean history and no large data files. The repository for our first project was littered with files that weren't relevant for version-control. We copy and paste our first milestone files to the new repository. Regarding structure, the new 'master' branch is used for our final assignement submissions and the 'current-project' branch is used as our working directory.
+
 ## Task 1: 
 
 We added the following files to ignore into our .gitignore file. We oriented ourselves on a recommendation of another .gitignore file in order to see which files could be helpful to have in our .gitignore. Since we do not have a computer science background, we do not necessarily know which kind of hidden files can appear in our git folders. Therefore we added the following list to our .gitignore:
