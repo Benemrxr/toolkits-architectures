@@ -1,5 +1,5 @@
 # Milestone 2: Group Marxer, Kotatis, Rohrer
-This report documents our progress for the second milestone.
+This report documents our progress for the second milestone. :sunglasses:
 
 ### Before we get started:
 We set up a [new project repository](https://github.com/Benemrxr/toolkits-architectures.git)  with a clean history and no large data files. The repository for our first project was littered with files that weren't relevant for version-control. We copy and paste our first milestone files to the new repository. Regarding structure, the new 'master' branch is used for our final assignement submissions and the 'current-project' branch is used as our working directory.
@@ -119,3 +119,37 @@ python3 save_load.py
 python3 main.py
 ```
 Our code has run successfully in this isolated Python environment.
+
+## Task 6
+>"Dockerize" your code:
+>- Install Docker on your machines
+>- Create a Dockerfile that installs all necessary dependencies and is capable of running Tensorflow/Keras in CPU mode.
+
+First we install docker. I am using Visual Studio Code on Windows right now, which is why I install [Docker Desktop](https://www.docker.com/products/docker-desktop) via the docker website.
+
+Installation was successfull:
+```
+$ docker --version
+Docker version 19.03.13, build 4484c46d9d
+```
+But right now it doesn't work - the docker deamon is not running. I try to change some settings - namely the WSL setting, I deactive it. Now, there seems to be a problem with my available memory space. I first increase the allowance to 4 GB in Docker Desktop and then decrease to 1 GB, as the first change didn't work either (2 GB was the default). Now it runs! :fireworks:
+
+We get a getting-started dockerfile first:
+```
+Unable to find image 'docker/getting-started:latest' locally
+latest: Pulling from docker/getting-started
+cbdbe7a5bc2a: Pull complete
+85434292d1cb: Pull complete
+75fcb1e58684: Pull complete
+2a8fe5451faf: Pull complete
+42ceeab04dd4: Pull complete
+bdd639f50516: Pull complete
+c446f16e1123: Pull complete
+Digest: sha256:79d5eae6e7b1dec2e911923e463240984dad111a620d5628a5b95e036438b2df
+Status: Downloaded newer image for docker/getting-started:latest
+25338d00c13f5396b9454023897e3b5dc5ffcf43b34503f9dbf821f73d7f491a
+```
+
+
+
+:jack_o_lantern:
