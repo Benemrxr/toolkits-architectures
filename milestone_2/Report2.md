@@ -38,8 +38,17 @@ A Docker container is basically a box that contains all the requirements for a c
 
 Primarily we would definitely prefer using Docker instead of virtual environments. Since virtual environments only encapsulate Python dependencies . Docker however encapsules the whole operating system and can therefore be used on every machine with every operating system. So we can say that a virtual environment can be used if we use the same operating system on the opposite machine. If this is not the case, we should use Docker instead. 
 
+The docker build context is the set of files in the specified path. The build process can refer to any of the files in the docker build context. You also have the possibility to use an URL instead of a path. This URL points to a Git repository. 
 
+In our opinion, you have the possibility to assess the quality of a python package on PyPI via the GitHub statistics. The stars, forks and open issues give us an idea how often a certain package is used and how many software developers use them. This gives us an idea about the quality and user friendliness of the package.                                                                    
 
 ## Task 3:
 
-Our python code is already able to load data from Keras and to train (fit) a neural network. Because of that, we did not have to make any changes regarding these questions. The first thing we had to care about, was to save the fitted model in a .h5-file. We did this with the help of the command model.save("my_h5_model.h5"). 
+Our python code is already able to load data from Keras and to train (fit) a neural network. Because of that, we did not have to make any changes regarding these questions. The first thing we had to care about, was to save the fitted model in a .h5-file. We did this with the help of the command 'model.save("filename")'. 
+For the counterpart of saving the model, to load the model, we used the function 'load_model (“filename”)' from the Keras package. The last part of the task, to build a function that makes predictions, made us struggling. The reason for that is that we do not have that much experience in Python and with machine learning, to understand how to implement this function. With the help of google, we found a function that is especially developed for our machine learning project. We managed to make predictions for two different strings (good and bad). However we were not able to build a prediction function for datasets. We did not have an appropriate understanding of the machine learning project itself, to do that. 
+
+## Task 4
+
+To structure our code, we defined three different functions in two modules. The first function 'BuildModel ()' from the buildModel module is to build the model with the help of the data imported from Keras. This function has no input and simply builds the model. 
+
+The second module is the save_load module which contains two functions: (1) 'saveModel (model,filename)' and (2) 'loadModel (filename)'. (1) is used to save the model in a .h5 file. This function needs two parameters: the model itself and the name of the resulting .h5 file. (2) is used to load the model from a .h5 file. The function only takes one parameter: the name of the .h5 file. 
