@@ -6,6 +6,7 @@ from keras.datasets import imdb
 from keras.models import load_model
 import build_model
 import save_load
+import numpy as np
 
 model=build_model.buildModel()
 save_load.saveModel(model,"Model.h5")
@@ -26,4 +27,3 @@ for review in [good, bad]:
     tmp_padded = sequence.pad_sequences([tmp], maxlen=400)
     print("%s. Sentiment: %s" % (
         review, model.predict(np.array([tmp_padded[0]]))))
-        
