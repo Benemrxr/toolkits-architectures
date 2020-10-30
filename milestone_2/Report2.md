@@ -2,10 +2,11 @@
 This report documents our progress for the second milestone.
 
 ### Before we get started:
-We set up a new project repository with a clean history and no large data files. The repository for our first project was littered with files that weren't relevant for version-control. We copy and paste our first milestone files to the new repository. Regarding structure, the new 'master' branch is used for our final assignement submissions and the 'current-project' branch is used as our working directory.
+We set up a [new project repository](https://github.com/Benemrxr/toolkits-architectures.git)  with a clean history and no large data files. The repository for our first project was littered with files that weren't relevant for version-control. We copy and paste our first milestone files to the new repository. Regarding structure, the new 'master' branch is used for our final assignement submissions and the 'current-project' branch is used as our working directory.
 
 ## Task 1: 
-
+>Clean Git repositories are important.
+>Write an appropriate ".gitignore" file
 We added the following files to ignore into our .gitignore file. We oriented ourselves on a recommendation of another .gitignore file in order to see which files could be helpful to have in our .gitignore. Since we do not have a computer science background, we do not necessarily know which kind of hidden files can appear in our git folders. Therefore we added the following list to our .gitignore:
 
 *~   
@@ -29,6 +30,13 @@ The Linux trash folder which might appear.
 
 
 ## Task 2:
+>- What is a Hash function? What are some of the use cases?
+>- What is a Python module, package and script. How do they differ from one
+>another?
+>- How would YOU explain a Docker container and volume to a child?
+>- What is your preference concerning the use of Python virtualenv and Docker? When would you use one or the other (there is not right or wrong, mostly)?
+>- What is the Docker build context?
+>- How can you asses the quality of a python package on PyPI?
 
 A hash function is a function that can be used to map big sized data to fixed size values. The returned values are called hash values. These values are then used to index a so-called hash table. In the best case, each hash value stands for one bigger sized data part but there can also be collisions if one hash value stands for two different data parts. Hash functions are especially used in data storage and retrieval applications. It is used to store and access big amounts of data in a computationally and storage space efficient form. 
 
@@ -43,12 +51,71 @@ The docker build context is the set of files in the specified path. The build pr
 In our opinion, you have the possibility to assess the quality of a python package on PyPI via the GitHub statistics. The stars, forks and open issues give us an idea how often a certain package is used and how many software developers use them. This gives us an idea about the quality and user friendliness of the package.                                                                    
 
 ## Task 3:
+>Make sure your code has the following functionality (extend if necessary):
+>- Can load data
+>- Can train (fit) a neural network on the data
+>- Can save a fitted model to a ".h5" file
+>- Can load a ".h5" file, using Keras
+>- Can perform predictions using a "fitted" model, using Keras
 
 Our python code is already able to load data from Keras and to train (fit) a neural network. Because of that, we did not have to make any changes regarding these questions. The first thing we had to care about, was to save the fitted model in a .h5-file. We did this with the help of the command 'model.save("filename")'. 
 For the counterpart of saving the model, to load the model, we used the function 'load_model (“filename”)' from the Keras package. The last part of the task, to build a function that makes predictions, made us struggling. The reason for that is that we do not have that much experience in Python and with machine learning, to understand how to implement this function. With the help of google, we found a function that is especially developed for our machine learning project. We managed to make predictions for two different strings (good and bad). However we were not able to build a prediction function for datasets. We did not have an appropriate understanding of the machine learning project itself, to do that. 
 
 ## Task 4
+>- Split your code base into modules (for example the creation of the neural
+network might be in a "neuralnet_architecture.py" module). Explain the reasoning
+behind your modularization. Why did you choose to structure the code like this?
+>- There has to be one "main.py" script that calls the code in all the other
+modules. This is the script that you run with the "python" command.
+>- The modules are only allowed to contain imports and functions (for example
+"def create_neuralnet(): ...")
+>- Ensure PEP8 conformity.
 
-To structure our code, we defined three different functions in two modules. The first function 'BuildModel ()' from the buildModel module is to build the model with the help of the data imported from Keras. This function has no input and simply builds the model. 
+To structure our code, we defined three different functions in two modules. The first function `BuildModel ()` from the buildModel module is to build the model with the help of the data imported from Keras. This function has no input and simply builds the model. 
 
-The second module is the save_load module which contains two functions: (1) 'saveModel (model,filename)' and (2) 'loadModel (filename)'. (1) is used to save the model in a .h5 file. This function needs two parameters: the model itself and the name of the resulting .h5 file. (2) is used to load the model from a .h5 file. The function only takes one parameter: the name of the .h5 file. 
+The second module is the save_load module which contains two functions: (1) `saveModel (model,filename)` and (2) `loadModel (filename)`. (1) is used to save the model in a .h5 file. This function needs two parameters: the model itself and the name of the resulting .h5 file. (2) is used to load the model from a .h5 file. The function only takes one parameter: the name of the .h5 file. 
+
+## Task 5 
+> Create a pip "requirements file" for your code base and explain how you make it work within a virtualenv (step by step). Did you have to install virtualenv? 
+
+We modify the requirements.txt file from our first project so that it controls for the approriate version of our packages. Since Keras is included in Tensorflow, we only set `tensorflow == 2.3.1`, to ensure that we have the currently latest version of Tensorflow.
+
+Now, we are ready to test our code in a virtual environment:
+
+We install `virtualenv` to create an isolated Python environment, with some [advantages](https://virtualenv.pypa.io/en/latest/) over the base `venv` module. So the first step is: 
+```
+pip3 install virtualenv
+```
+We then create such an isolated environment in our desired working directory, with the following commands:
+```
+virtualenv -p /usr/bin/python3 env/project_2
+```
+Now activate said environment:
+```
+source env/project_2/bin/activate
+```
+Let's load our code files from GitHub!
+```
+git clone https://github.com/Benemrxr/toolkits-architectures.git
+```
+To test the code of this second milestone, we need to switch to the branch where the code is stored. Depending on when you are reading this you may skip this step and load the code from the master branch.
+```
+git switch functionizingCode
+```
+Nevermind, we were already in this branch. It is up-to-date, as we just cloned the repository.
+
+Before we can load the files, we need to change to the approriate directory:
+```
+cd toolkits-architectures/milstone_2
+```
+No, we can start loading the files. First of all, the requirements.txt file:
+```
+pip install -r requirements.txt
+```
+Ready to build the model? Let's go! Our code is modularizied, see Task 3 for the detailed information concerning the modules
+```
+python3 build_model.py
+python3 save_load.py
+python3 main.py
+```
+Our code has run successfully in this isolated Python environment.
