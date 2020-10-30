@@ -179,7 +179,7 @@ I tried to run the Dockerfile with various commands but none seemed to work. I t
 
 python: can't open file 'milestone_uild_model.py': [Errno 2] No such file or directory
 ```
-Now I have a new container in my Docker Desktop application, but I get the same error when I try to start it. Unfortunately I wasn't able to figure out a solution to this. [This website](https://help.pythonanywhere.com/pages/NoSuchFileOrDirectory/) tells me to use an absolute path, I assume in the Dockerfile, which would be weird since the path there was created automatically and since it appears to be correct: From the Dockerfile path, go to milestone_2/project2_main.py
+Now I have a new container in my Docker Desktop application, but I get the same error when I try to start it. Unfortunately I wasn't able to figure out a solution to this. [This website](https://help.pythonanywhere.com/pages/NoSuchFileOrDirectory/) tells me to use an absolute path, I assume in the Dockerfile, which would be weird since the path there was created automatically and since it appears to be correct: From the Dockerfile path, go to milestone_2/project2_main.py. To release the folder **milstone_2** we had to make some quick changes and adapt the path.
 
 *Unfortunately we weren't able to finish this task with the Dockerfile. We tried very hard up until the very end of this deadline (it's 9 pm right now), but it just didn't work out. Maybe it would have been better to create an issue on GitHub and ask for help via Slack, for potential problems in the future. It's not that easy to formulate precise questions when nothing seems to work.*
 *I think we might need to make changes to the modules / functions as well, before the next milestone*
