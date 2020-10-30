@@ -116,7 +116,7 @@ Ready to build the model? Let's go! Our code is modularizied, see Task 3 for the
 ```
 python3 build_model.py
 python3 save_load.py
-python3 main.py
+python3 project_2_main.py
 ```
 Our code has run successfully in this isolated Python environment.
 
@@ -166,5 +166,23 @@ Besides this, we have a .dockerignore file and a new requirements.txt file. For 
 
 The next step wants me to add the following command underneath the `EXPOSE` statement: `ENV` where `KEY` is `VAR1` and `VALUE` is `10`. We don't have a expose statement and I don't understand the rest of the tutorial. 
 
+I tried to set up a public repository on Docker Hub, but wasn't able to push any files on it. The link can be found [here](https://hub.docker.com/repository/docker/benemrxr/toolkits/). Maybe this comes in useful for our next milstone. 
 
-:jack_o_lantern:
+I tried to run the Dockerfile with various commands but non seemed to work. I tried to run an image I created called `toolkitsarchitectures` and tried to run this with `docker run toolkitsarchitectures` but received the following error message: 
+```
+> Executing task: docker logs -f a33926fb7996e044012599898dc0c38d9caafadcd61a673b6e954182eaa80dab <
+
+python: can't open file 'milestone_uild_model.py': [Errno 2] No such file or directory
+```
+
+## Little project riddle:
+>- Can you decode this (the first team will get candy from us)?
+aHR0cHM6Ly93d3cuZG9ja2VyLmNvbS9ibG9nL3dwLWNvbnRlbnQvdXBsb2Fkcy8yMDE5LzEwLzIwMTgtSGFsbG93ZWVuLTIuanBnP3NzbD0x
+
+While we weren't able to solve the last task (yet), I was able to decode the little riddle at the end of the assignement. I used my search engine to find an online decoding site and simply pasted the code in. The site I used was [base64decode.org](https://www.base64decode.org/). The encoded message is a nice picture on Docker! [Click here](https://www.docker.com/blog/wp-content/uploads/2019/10/2018-Halloween-2.jpg?ssl=1). Very cool! :jack_o_lantern:
+
+### Issues:
+- Dockerfile / Image / Container
+
+### Outstanding: 
+- Load the Dockerfile from the server. 
