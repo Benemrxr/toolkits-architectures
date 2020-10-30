@@ -132,24 +132,39 @@ Installation was successfull:
 $ docker --version
 Docker version 19.03.13, build 4484c46d9d
 ```
-But right now it doesn't work - the docker deamon is not running. I try to change some settings - namely the WSL setting, I deactive it. Now, there seems to be a problem with my available memory space. I first increase the allowance to 4 GB in Docker Desktop and then decrease to 1 GB, as the first change didn't work either (2 GB was the default). Now it runs! :fireworks:
+But right now it doesn't work - the docker daemon is not running. I try to change some settings - namely the WSL setting, I deactive it. Now, there seems to be a problem with my available memory space. I first increase the allowance to 4 GB in Docker Desktop and then decrease to 1 GB, as the first change didn't work either (2 GB was the default). Now it runs! :fireworks:
 
-We get a getting-started dockerfile first:
-```
-Unable to find image 'docker/getting-started:latest' locally
-latest: Pulling from docker/getting-started
-cbdbe7a5bc2a: Pull complete
-85434292d1cb: Pull complete
-75fcb1e58684: Pull complete
-2a8fe5451faf: Pull complete
-42ceeab04dd4: Pull complete
-bdd639f50516: Pull complete
-c446f16e1123: Pull complete
-Digest: sha256:79d5eae6e7b1dec2e911923e463240984dad111a620d5628a5b95e036438b2df
-Status: Downloaded newer image for docker/getting-started:latest
-25338d00c13f5396b9454023897e3b5dc5ffcf43b34503f9dbf821f73d7f491a
-```
+We get a getting-started dockerfile first.
 
+I now try to dockerize our Python code. [This](https://code.visualstudio.com/docs/containers/quickstart-python) tutorial comes in handy, yet I only manage to complete the steps for adding files to the project.
+This is our current Dockerfile:
+```
+# For more information, please refer to https://aka.ms/vscode-docker-python
+FROM python:3.8-slim-buster
+
+# Keeps Python from generating .pyc files in the container
+ENV PYTHONDONTWRITEBYTECODE=1
+
+# Turns off buffering for easier container logging
+ENV PYTHONUNBUFFERED=1
+
+# Install pip requirements
+ADD requirements.txt .
+RUN python -m pip install -r requirements.txt
+
+WORKDIR /app
+ADD . /app
+
+# Switching to a non-root user, please refer to https://aka.ms/vscode-docker-python-user-rights
+RUN useradd appuser && chown -R appuser /app
+USER appuser
+
+# During debugging, this entry point will be overridden. For more information, please refer to https://aka.ms/vscode-docker-python-debug
+CMD ["python", "milestone_2\project2_main.py"]
+```
+Besides this, we have a .dockerignore file and a new requirements.txt file. For some reason, the requirements file is empty. I'm not sure why, it was auto-created.
+
+The next step wants me to add the following command underneath the `EXPOSE` statement: `ENV` where `KEY` is `VAR1` and `VALUE` is `10`. We don't have a expose statement and I don't understand the rest of the tutorial. 
 
 
 :jack_o_lantern:
