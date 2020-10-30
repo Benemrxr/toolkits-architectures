@@ -7,6 +7,7 @@ We set up a [new project repository](https://github.com/Benemrxr/toolkits-archit
 ## Task 1: 
 >Clean Git repositories are important.
 >Write an appropriate ".gitignore" file
+
 We added the following files to ignore into our .gitignore file. We oriented ourselves on a recommendation of another .gitignore file in order to see which files could be helpful to have in our .gitignore. Since we do not have a computer science background, we do not necessarily know which kind of hidden files can appear in our git folders. Therefore we added the following list to our .gitignore:
 
 *~   
@@ -166,7 +167,7 @@ Besides this, we have a .dockerignore file and a new requirements.txt file. For 
 
 The next step wants me to add the following command underneath the `EXPOSE` statement: `ENV` where `KEY` is `VAR1` and `VALUE` is `10`. We don't have a expose statement and I don't understand the rest of the tutorial. 
 
-I tried to set up a public repository on Docker Hub, but wasn't able to push any files on it. The link can be found [here](https://hub.docker.com/repository/docker/benemrxr/toolkits/). Maybe this comes in useful for our next milstone. 
+I tried to set up a public repository on **Docker Hub**, but wasn't able to push any files on it. The link can be found [here](https://hub.docker.com/repository/docker/benemrxr/toolkits/). Maybe this comes in useful for our next milstone. 
 
 I tried to run the Dockerfile with various commands but non seemed to work. I tried to run an image I created called `toolkitsarchitectures` and tried to run this with `docker run toolkitsarchitectures` but received the following error message: 
 ```
