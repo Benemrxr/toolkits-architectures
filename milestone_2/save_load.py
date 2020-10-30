@@ -7,7 +7,6 @@ from keras.layers import Embedding
 from keras.layers import Conv1D, GlobalMaxPooling1D
 from keras.datasets import imdb
 from keras.models import load_model
-import numpy as np
 
 # Save fitted model as .h5-file
 def saveModel(model,filename):

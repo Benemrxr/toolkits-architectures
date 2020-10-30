@@ -4,7 +4,6 @@ from keras.preprocessing import sequence
 from keras.models import Sequential
 from keras.datasets import imdb
 from keras.models import load_model
-import numpy as np
 import build_model
 import save_load
 
@@ -27,3 +26,4 @@ for review in [good, bad]:
     tmp_padded = sequence.pad_sequences([tmp], maxlen=400)
     print("%s. Sentiment: %s" % (
         review, model.predict(np.array([tmp_padded[0]]))))
+        
