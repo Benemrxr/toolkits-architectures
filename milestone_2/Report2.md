@@ -10,7 +10,7 @@ We set up a [new project repository](https://github.com/Benemrxr/toolkits-archit
 
 We added the following files to ignore into our .gitignore file. We oriented ourselves on a recommendation of another .gitignore file in order to see which files could be helpful to have in our .gitignore. Since we do not have a computer science background, we do not necessarily know which kind of hidden files can appear in our git folders. Therefore we added the following list to our .gitignore:
 
-*~   
+`*~`   
 All the files that end with the sign “~” these are backup files from Linux itself.
 
 `.fuse_hidden*`  
