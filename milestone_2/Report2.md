@@ -10,25 +10,26 @@ We set up a [new project repository](https://github.com/Benemrxr/toolkits-archit
 
 We added the following files to ignore into our .gitignore file. We oriented ourselves on a recommendation of another .gitignore file in order to see which files could be helpful to have in our .gitignore. Since we do not have a computer science background, we do not necessarily know which kind of hidden files can appear in our git folders. Therefore we added the following list to our .gitignore:
 
-*~   
+`*~`   
 All the files that end with the sign “~” these are backup files from Linux itself.
 
-.fuse_hidden*  
+`.fuse_hidden*`  
 
 Temporary files which can be created if a process still has a handle open of a deleted file.
 
-.directory
+`.directory`
 
 KDE directory preferences. 
 
-.Trash-*
+`.Trash-*`
 
 The Linux trash folder which might appear.
 
-.nfs*
+`.nfs*`
 
 .nfs files are created when an open file is removed but is still being accessed 
 
+We never used the .gitignore on the master branch. To work with our code, we always used seperate branches and simply pushed the .gitignore direct to this very branch where we worked. And in the end of the milestones, we merged the .gitignore to the master branch.
 
 ## Task 2:
 >- What is a Hash function? What are some of the use cases?
