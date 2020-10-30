@@ -5,16 +5,13 @@ from keras.models import Sequential
 from keras.datasets import imdb
 from keras.models import load_model
 import numpy as np
-import buildModel
+import build_model
 import save_load
 
-model=buildModel.BuildModel()
+model=build_model.buildModel()
 save_load.saveModel(model,"Model.h5")
 
 
-# Predict sentiment from reviews
-
-# reverse lookup
 word_to_id = imdb.get_word_index()
 '''word_to_id = {k: (v + INDEX_FROM) for k, v in word_to_id.items()}'''
 word_to_id["<PAD>"] = 0
