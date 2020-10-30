@@ -132,7 +132,7 @@ Installation was successfull:
 $ docker --version
 Docker version 19.03.13, build 4484c46d9d
 ```
-But right now it doesn't work - the docker daemon is not running. I try to change some settings - namely the WSL setting, I deactive it. Now, there seems to be a problem with my available memory space. I first increase the allowance to 4 GB in Docker Desktop and then decrease to 1 GB, as the first change didn't work either (2 GB was the default). Now it runs! :fireworks:
+But right now it doesn't work - the docker daemon is not running. I try to change some settings - namely the WSL setting, I deactive it. Now, there seems to be a problem with my available memory space. I first increase the allowance to 4 GB in Docker Desktop and then decrease to 1 GB, as the first change didn't work either (2 GB was the default). Now it runs!
 
 We get a getting-started dockerfile first.
 
@@ -162,7 +162,7 @@ USER appuser
 # During debugging, this entry point will be overridden. For more information, please refer to https://aka.ms/vscode-docker-python-debug
 CMD ["python", "milestone_2\project2_main.py"]
 ```
-Besides this, we have a .dockerignore file and a new requirements.txt file. For some reason, the requirements file is empty. I'm not sure why, it was auto-created.
+Besides this, we have a .dockerignore file and a new requirements.txt file. For some reason, the requirements file is empty. I'm not sure why, it was auto-created. I wanted to keep it this way and change it if it causes a problem.
 
 The next step wants me to add the following command underneath the `EXPOSE` statement: `ENV` where `KEY` is `VAR1` and `VALUE` is `10`. We don't have a expose statement and I don't understand the rest of the tutorial. 
 
