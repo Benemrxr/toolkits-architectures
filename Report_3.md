@@ -34,8 +34,8 @@ To check out how the host machine communicates with the application, we first ru
 
        Name                      Command               State           Ports         
 -------------------------------------------------------------------------------------
-composetest_redis_1   docker-entrypoint.sh redis ...   Up      6379/tcp              
-composetest_web_1     flask run                        Up      0.0.0.0:5000->5000/tcp
+|composetest_redis_1 |  docker-entrypoint.sh redis ...|   Up  |	 6379/tcp            |   
+|composetest_web_1   |  flask run                     |  Up   |    0.0.0.0:5000->5000/tcp  |
 
 There we can see, that the our host machine (0.0.0.0) communicates via the port 5000 to the application server, using the port 5000 too. The data is exchanged by the "tcp" (transmission control protocol). 
 
