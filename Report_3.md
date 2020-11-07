@@ -43,4 +43,78 @@ There we can see, that the our host machine (0.0.0.0) communicates via the port 
 
 The term "localhost" is refering to the local ip-address of my own computer or device. In concrete terms, "localhost" is used to connect to a certain ip-address from my local machine. Thats also the reason why it is used in the web-domain. For example the domain: http:/localhost:5000 can be used to connect from our local machine ("localhost") to the port 5000. In our case, this is exactly the port where the application is running and we see the output of this very application. 
 
+## Task 2:
+
+> What is PostgreSQL? SQL or no-SQL (why?)
+
+
+
+
+
+>Run a PostgreSQL Server using a Docker image from PostgreSQL Docker Hub page.
+
+Before we were able to run a PostgreSQL server, we first had to install PostgreSQL. Therefore we followed the following steps:
+
+1. Creating the file repository configuration:
+```
+sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+```
+2. Importing the repository signing key:
+```
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+```
+3. Updating the package lists:
+```
+sudo apt-get update
+```
+4. Installing PostgreSQL Version 12.4:
+```
+sudo apt -y install postgresql-12 postgresql-client-12
+```
+5. Give sudo-rights to the created user:
+```
+sudo su - postgres
+```
+
+6. Starting PostgreSQL prompt:
+```
+psql
+```
+
+Since this worked well, we now know that PostgreSQL was installed correctly on our machines.
+Now to run a PostgreSQL Server using a docker image, we first downloaded the Docker Image from Docker Hub. We did this by using `docker pull postres`. We then ran the Docker Image with the following command:
+```
+docker run --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword -d postgres
+```
+finally we used the command `docker ps` to check if everything worked properly. We noticed that the container was running on port 5432. 
+
+> Find an appropriate Python package (Postgres adapter) 
+
+To connect to our PostgreSQL database, we installed the package pyscopg2. Since it did not work to install it with 
+conn = psycopg2.connect("dbname='some-postgres' user='' host='172.17.0.2' password='55vbve' port='5432'")
+
+> Write a little python script
+
+### Connecting to PostgreSQL
+
+In order to build a connection we use the function psycopg2.connect() from the package described above. Therefore we need several parameters:
+
+1. Name of the database
+2. User
+3. Host
+4. Password
+5. Port
+
+To get these informations, we first used the command 
+```
+docker exec -tiu postgres some-postgres psql
+```
+We open up the prompt of our database like that. In there we can use the command `\conninfo` to get all the information, except the password of course. This is simply the password that we defined in the command to run the database on Docker.
+
+### Creating database
+
+The creation of the database worked quite well. The only problem we faced here was, that we had to define autocommits as True in order to create the database. 
+
+### Creating Table
+
 
