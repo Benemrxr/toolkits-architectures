@@ -2,7 +2,7 @@
 This report documents our progress for the milestone number :three:.  :zap:
 
 ## Task 1: 
->- Install docker-compose.
+> Install docker-compose.
 
 We tried to install docker compose using the the following command:
 
@@ -15,7 +15,7 @@ But we got an error, that the `curl` command was not found. To install docker co
 ```
 sudo chmod +x /usr/local/bin/docker-compose
 ```
->- Which services are being used for the application?
+> Which services are being used for the application?
 
 There are two services used for the application:
 
@@ -24,11 +24,11 @@ There are two services used for the application:
 
 These two services are used by the application to run the "Hello-World-App" on the Redis server. Therefore we use the hostname "redis" inside of the python application. Python uses Flask to cre applications and make them running on web servers. Redis on the other hand serves as the data storage system on which the app is running.
 
->- What ports are being used?
+> What ports are being used?
 
 Within the application, we use the port 6379 on which we run the redis storage system. In the docker-compose, we used port 5000. We know this by reading the docker-compose.yml file. 
 
-> - How does the host machine communicate with the application inside the Docker container. Which ports are exposed?
+>  How does the host machine communicate with the application inside the Docker container. Which ports are exposed?
 
 To check out how the host machine communicates with the application, we first run the application within the docker-compose. We opened up a new terminal and with the help of `docker-compose ps`, we checked out the running containers and got the following output:
 
@@ -39,15 +39,15 @@ To check out how the host machine communicates with the application, we first ru
 
 There we can see that our host machine (0.0.0.0) communicates via the port 5000 to the application server, who uses this same server. The data is exchanged by the "tcp" (transmission control protocol). 
 
-> - What is localhost? Why is it useful in the domain?
+>  What is localhost? Why is it useful in the domain?
 
 The term "localhost" is refering to the local ip-address of my own computer or device. In concrete terms, "localhost" is used to connect to a certain ip-address from my local machine. Thats also the reason why it is used in the web-domain. For example the domain: http:/localhost:5000 can be used to connect from our local machine ("localhost") to the port 5000. In our case, this is exactly the port where the application is running and we see the output of this very application. 
 
 ## Task 2:
 
-> - What is PostgreSQL? SQL or no-SQL (why?)
+>  What is PostgreSQL? SQL or no-SQL (why?)
 
-> - Run a PostgreSQL Server using a Docker image from PostgreSQL Docker Hub page.
+>  Run a PostgreSQL Server using a Docker image from PostgreSQL Docker Hub page.
 
 Before we were able to run a PostgreSQL server, we first had to install PostgreSQL. Therefore we followed the following steps:
 
@@ -102,12 +102,12 @@ docker run --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword -d postgre
 ```
 Lastly we use the command `docker ps` to check if everything works properly. We notice that the container is running on port 5432, with tcp. 
 
-> - Make sure you expose the correct ports when running the Docker container (read the documentation on Docker Hub)
+>  Make sure you expose the correct ports when running the Docker container (read the documentation on Docker Hub)
 
-> - Find an appropriate Python package (Postgres adapter) 
+Is the correct port exposed? / Is this answered in the line above?
+> Find an appropriate Python package (Postgres adapter) 
 
-To connect to our PostgreSQL database, we installed the package pyscopg2. Since it did not work to install it with 
-conn = psycopg2.connect("dbname='some-postgres' user='' host='172.17.0.2' password='55vbve' port='5432'")
+To connect to our PostgreSQL database, we install the package `psycopg2`. Since it did not work to install it with conn = psycopg2.connect("dbname='some-postgres' user='' host='172.17.0.2' password='55vbve' port='5432'")
 
 >  Write a little python script that:
 > - Connects to the database server using "localhost:port". You will have to enter a username and password too (again, read the docs)
@@ -117,9 +117,23 @@ conn = psycopg2.connect("dbname='some-postgres' user='' host='172.17.0.2' passwo
 >- Selects your favorite joke (now in the database), and fetches it from the database
 >- Prints your favorite joke. You should see your joke in it's full glory.
 
-> - Download the PGADMIN Tool (https://www.pgadmin.org/download/). It also existsas a Docker Image :). Connect to your running PostgreSQL Database. Can you see your database and table?
+>  Download the PGADMIN Tool (https://www.pgadmin.org/download/). It also exists as a Docker Image :). Connect to your running PostgreSQL Database. Can you see your database and table?
 
-> - If you stopped and deleted the Docker container running the database and
+We can pull the Docker Image of the `pdAdmin tool` from Docker Hub with the Docker Pull Command below:
+```console
+docker pull dpage/pgadmin4
+```
+This will certainly be a useful inclusion in our docker container, but for our current purposes we are better suited with a direct installation from the pgDamin website: https://www.pgadmin.org/download/.
+
+For our container, we add the following lines of code:
+```console
+services: 
+       pgadmin:
+              image: "dpage/pgadmin4:latest"
+```
+
+
+>  If you stopped and deleted the Docker container running the database and
 restarted it. Would your joke still be in the database? Why or why not?
 
 ### Connecting to PostgreSQL
