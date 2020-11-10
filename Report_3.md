@@ -117,13 +117,22 @@ To connect to our PostgreSQL database, we install the package `psycopg2`. Since 
 >- Selects your favorite joke (now in the database), and fetches it from the database
 >- Prints your favorite joke. You should see your joke in it's full glory.
 
+Our python script is called `jokes.py`. We use the package `psycopg2` to connect to our PostgreSQL database. Install the current version thereof with the code below from the Python Package Index software repository.
+```console
+pip install psycopg2==2.8.6
+```
+If you get an error, try:
+```console
+sudo apt-get install python3-psycopg2
+```
+
 >  Download the PGADMIN Tool (https://www.pgadmin.org/download/). It also exists as a Docker Image :). Connect to your running PostgreSQL Database. Can you see your database and table?
 
 We can pull the Docker Image of the `pdAdmin tool` from Docker Hub with the Docker Pull Command below:
 ```console
 docker pull dpage/pgadmin4
 ```
-This will certainly be a useful inclusion in our docker container, but for our current purposes we are better suited with a direct installation from the pgDamin website: https://www.pgadmin.org/download/.
+This will certainly be a useful inclusion in our docker container, but for our current purposes we are better suited with a direct installation from the pgAdmin website: https://www.pgadmin.org/download/. Alternatively, we can use pip to install it from the PyPi with `pip install pgadmin4`.
 
 For our container, we add the following lines of code:
 ```console
@@ -136,6 +145,18 @@ services:
 >  If you stopped and deleted the Docker container running the database and
 restarted it. Would your joke still be in the database? Why or why not?
 
+To get the Docker containers name:
+```console
+docker ps -a | awk '{print $NF}'
+```
+As expected our container is named `some-postgres`. Stop it and then delete:
+```console
+$ docker stop some-postgres
+$ docker rm some-postgres
+```
+We can check with `docker ps -a` to make sure the container is deleted.
+
+Now lets restart the container and database, to check whether the joke is still in it.
 ### Connecting to PostgreSQL
 
 In order to build a connection we use the function psycopg2.connect() from the package described above. Therefore we need several parameters:
@@ -151,6 +172,19 @@ To get these informations, we first used the command
 docker exec -tiu postgres some-postgres psql
 ```
 We open up the prompt of our database like that. In there we can use the command `\conninfo` to get all the information, except the password of course. This is simply the password that we defined in the command to run the database on Docker.
+
+To show our table we can use the command:
+```console
+\dt
+```
+That gives us this output:
+
+              List of relations
+       Schema |      Name   |      Type   |      Owner
+       public |      jokes  |      table  |      postgres
+       (1 row)
+
+
 
 ### Creating database
 
