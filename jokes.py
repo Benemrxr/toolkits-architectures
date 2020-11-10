@@ -6,7 +6,7 @@ conn.autocommit = True
 
 #Creating a cursor object using the cursor() method
 cursor = conn.cursor()
-"""
+
 #Preparing query to create a database
 database = '''CREATE database ms3_jokes'''
 
@@ -21,16 +21,16 @@ table ='''CREATE TABLE JOKES(
 )'''
 cursor.execute(table)
 print("Table created successfully........")
-"""
+
 
 # Insert Joke 
-"""
+
 cursor.execute('''INSERT INTO JOKES(
    ID, JOKE) VALUES 
    (001,'Two fish in a tank. One says: “How do you drive this thing?' )''')
 
 print("Joke successfully added...")
-"""
+
 # Get Joke 
 
 cursor.execute('''SELECT * from JOKES''')
