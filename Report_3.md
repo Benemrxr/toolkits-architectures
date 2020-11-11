@@ -1,19 +1,32 @@
 # Milestone 3: Group Marxer, Kotatis, Rohrer
-This report documents our progress for the milestone number :three:.  :zap:
+This report documents our progress for the milestone number :three:. Enjoy! :zap:
+
+## Structure:
+- Changes from feedback
+- Task 1
+- Task 2
+- Task 3
+- Task 4
+
+## Changes from feedback
+
+> Add `tensorflow.` before each `keras.something` import.
+
+> Other changes to the code?
 
 ## Task 1: 
 > Install docker-compose.
 
 We tried to install docker compose using the the following command:
 
-```
-sudo curl -L "https://github.com/docker/compose/releases/download/1.26.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose 
+```cosnole
+$ sudo curl -L "https://github.com/docker/compose/releases/download/1.26.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose 
 ```
 
 But we got an error, that the `curl` command was not found. To install docker compose this way, we first had to install the curl-function itself. Therefore we used the command `sudo apt install curl`. After we ran this command, we were able to install docker compose with the command above. To use docker-compose, we had to run the following command so that the `docker-compose` command is executable:
 
-```
-sudo chmod +x /usr/local/bin/docker-compose
+```console
+$ sudo chmod +x /usr/local/bin/docker-compose
 ```
 > Which services are being used for the application?
 
@@ -52,29 +65,29 @@ The term "localhost" is refering to the local ip-address of my own computer or d
 Before we were able to run a PostgreSQL server, we first had to install PostgreSQL. Therefore we followed the following steps:
 
 1. Creating the file repository configuration:
-```
-sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+```console
+$ sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
 ```
 2. Importing the repository signing key:
-```
-wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+```console
+$ wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
 ```
 3. Updating the package lists:
-```
-sudo apt-get update
+```console
+$ sudo apt-get update
 ```
 4. Installing PostgreSQL Version 12.4:
-```
-sudo apt -y install postgresql-12 postgresql-client-12
+```console
+$ sudo apt -y install postgresql-12 postgresql-client-12
 ```
 5. Give sudo-rights to the created user:
-```
-sudo su - postgres
+```console
+$ sudo su - postgres
 ```
 
 6. Starting PostgreSQL prompt (if there's a permission problem, try the following creation of a Unix group called docker and add the user postgres to it):
-```
-psql
+```console
+$ psql
 ```
 
 Since this worked well, we now know that PostgreSQL was installed correctly on our machines.
@@ -97,8 +110,8 @@ $ docker run hello-world
 Now there shouldn't be any permission problems. Finally, back to the `docker pull postgres` command. 
 
 We run the Docker Image with the following command:
-```
-docker run --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword -d postgres
+```console
+$ docker run --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword -d postgres
 ```
 Lastly we use the command `docker ps` to check if everything works properly. We notice that the container is running on port 5432, with tcp. 
 
@@ -107,7 +120,7 @@ Lastly we use the command `docker ps` to check if everything works properly. We 
 Is the correct port exposed? / Is this answered in the line above?
 > Find an appropriate Python package (Postgres adapter) 
 
-To connect to our PostgreSQL database, we install the package `psycopg2`. Since it did not work to install it with conn = psycopg2.connect("dbname='some-postgres' user='' host='172.17.0.2' password='55vbve' port='5432'")
+To connect to our PostgreSQL database, we install the package `psycopg2`. Since it did not work to install it with `conn = psycopg2.connect("dbname='some-postgres' user='' host='172.17.0.2' password='55vbve' port='5432'")`
 
 >  Write a little python script that:
 > - Connects to the database server using "localhost:port". You will have to enter a username and password too (again, read the docs)
@@ -119,23 +132,23 @@ To connect to our PostgreSQL database, we install the package `psycopg2`. Since 
 
 Our python script is called `jokes.py`. We use the package `psycopg2` to connect to our PostgreSQL database. Install the current version thereof with the code below from the Python Package Index software repository.
 ```console
-pip install psycopg2==2.8.6
+$ pip install psycopg2==2.8.6
 ```
 If you get an error, try:
 ```console
-sudo apt-get install python3-psycopg2
+$ sudo apt-get install python3-psycopg2
 ```
 
 >  Download the PGADMIN Tool (https://www.pgadmin.org/download/). It also exists as a Docker Image :). Connect to your running PostgreSQL Database. Can you see your database and table?
 
 We can pull the Docker Image of the `pdAdmin tool` from Docker Hub with the Docker Pull Command below:
 ```console
-docker pull dpage/pgadmin4
+$ docker pull dpage/pgadmin4
 ```
 This will certainly be a useful inclusion in our docker container, but for our current purposes we are better suited with a direct installation from the pgAdmin website: https://www.pgadmin.org/download/. Alternatively, we can use pip to install it from the PyPi with `pip install pgadmin4`.
 
 For our container, we add the following lines of code:
-```console
+```
 services: 
        pgadmin:
               image: "dpage/pgadmin4:latest"
@@ -147,7 +160,7 @@ restarted it. Would your joke still be in the database? Why or why not?
 
 To get the Docker containers name:
 ```console
-docker ps -a | awk '{print $NF}'
+$ docker ps -a | awk '{print $NF}'
 ```
 As expected our container is named `some-postgres`. Stop it and then delete:
 ```console
@@ -168,16 +181,12 @@ In order to build a connection we use the function psycopg2.connect() from the p
 5. Port
 
 To get these informations, we first used the command 
-```
-docker exec -tiu postgres some-postgres psql
+```console
+$ docker exec -tiu postgres some-postgres psql
 ```
 We open up the prompt of our database like that. In there we can use the command `\conninfo` to get all the information, except the password of course. This is simply the password that we defined in the command to run the database on Docker.
 
-To show our table we can use the command:
-```console
-\dt
-```
-That gives us this output:
+To show our table we can use the command `\dt`. That gives us this output:
 
               List of relations
        Schema |      Name   |      Type   |      Owner
