@@ -139,40 +139,7 @@ If you get an error, try:
 $ sudo apt-get install python3-psycopg2
 ```
 
->  Download the PGADMIN Tool (https://www.pgadmin.org/download/). It also exists as a Docker Image :). Connect to your running PostgreSQL Database. Can you see your database and table?
-
-We can pull the Docker Image of the `pdAdmin tool` from Docker Hub with the Docker Pull Command below:
-```console
-$ docker pull dpage/pgadmin4
-```
-This will certainly be a useful inclusion in our docker container, but for our current purposes we are better suited with a direct installation from the pgAdmin website: https://www.pgadmin.org/download/. Alternatively, we can use pip to install it from the PyPi with `pip install pgadmin4`.
-
-For our container, we add the following lines of code:
-```
-services: 
-       pgadmin:
-              image: "dpage/pgadmin4:latest"
-```
-
-
->  If you stopped and deleted the Docker container running the database and
-restarted it. Would your joke still be in the database? Why or why not?
-
-To get the Docker containers name:
-```console
-$ docker ps -a | awk '{print $NF}'
-```
-As expected our container is named `some-postgres`. Stop it and then delete:
-```console
-$ docker stop some-postgres
-$ docker rm some-postgres
-```
-We can check with `docker ps -a` to make sure the container is deleted.
-
-Now lets restart the container and database, to check whether the joke is still in it.
-### Connecting to PostgreSQL
-
-In order to build a connection we use the function psycopg2.connect() from the package described above. Therefore we need several parameters:
+In order to build a connection we use the function `psycopg2.connect()` from the package described above. Therefore we need several parameters:
 
 1. Name of the database
 2. User
@@ -194,6 +161,41 @@ To show our table we can use the command `\dt`. That gives us this output:
        (1 row)
 
 
+>  Download the PGADMIN Tool (https://www.pgadmin.org/download/). It also exists as a Docker Image :). Connect to your running PostgreSQL Database. Can you see your database and table?
+
+We can pull the Docker Image of the `pdAdmin tool` from Docker Hub with the Docker Pull Command below:
+```console
+$ docker pull dpage/pgadmin4
+```
+This will certainly be a useful inclusion in our docker container, but for our current purposes we are better suited with a direct installation from the pgAdmin website: https://www.pgadmin.org/download/. Alternatively, we can use pip to install it from the PyPi with `pip install pgadmin4`. To do this, we need to create a virtual environment, as laid out in https://www.pgadmin.org/download/pgadmin-4-python/. Then, we configure our local user with `$ pgadmin4` and use `user@domain.com` for the email and `mysecretpassword` for the password. Now the pgAdmin 4 tool start and we can navigate to http://127.0.0.1:5050 in our browser.
+
+From there, we can **add a new server** on the **dashboard** tab. In the **create - server** dialog box, we type a name in the **general** tab to identify our server in pgAdmin. We name it jokes, for example. On the **connection** tab, we type information for the **host** (IP), **port** (5432), **username** (postgres) and **password** (mysecretpassword). We choose **save** and can access our database in the pgAdmin browser by expanding server. 
+
+:exclamation: However, we can't find any table or views. :exclamation:
+
+For our container, we might add the following lines of code:
+```
+services: 
+       pgadmin:
+              image: "dpage/pgadmin4:latest"
+```
+
+>  If you stopped and deleted the Docker container running the database and restarted it. Would your joke still be in the database? Why or why not?
+
+To get the Docker containers name:
+```console
+$ docker ps -a | awk '{print $NF}'
+```
+As expected our container is named `some-postgres`. Stop it and then delete:
+```console
+$ docker stop some-postgres
+$ docker rm some-postgres
+```
+We can check with `docker ps -a` to make sure the container is deleted.
+
+Now let us restart the container and database, to check whether the joke is still in it.
+
+We use the `docker run ...` command from above to start the container and the `docker exec ...` from above to open up the psql prompt. We can use the `\dt` command to look for our table, but get a message that it did not find any relations. To persist our data, we would need to use a Docker volume.
 
 ### Creating database
 
