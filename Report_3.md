@@ -60,6 +60,14 @@ The term "localhost" is refering to the local ip-address of my own computer or d
 
 >  What is PostgreSQL? SQL or no-SQL (why?)
 
+`PostgreSQL` is an open-relational database system (RDBMS) that makes use of the SQL language and offers many features for data types and integrity, performance, reliability, security and many more tasks. Free and open-source, it ranks among the most popular database management systems ([db-engine.com ranking](https://db-engines.com/en/ranking)). 
+
+The primary front-end for PostgreSQL is the `psql` command-line program, which we try out later on. It can be used to enter SQL queries directly.
+
+Another useful tool for us is `pgAdmin`, a GUI administration tool.
+
+Now whether it is SQL or no-SQL: In my understanding, SQL is, by definition, structured data, whereas non-SQL is "semi-structured" data that does not fit well into a tabular representation ([so.com, Laurenz](https://stackoverflow.com/questions/47942913/is-postgresql-a-nosql-database/47943104)). So PostgreSQL, which is a RDBMS is SQL and not the NoSQL non-relational DBMS. That being said, it seems that PostgreSQL offers NoSQL capabilities such as JSON output, so users can utilize PostreSQL like a NoSQL document database ([so.com, Ben and Jameels' answer](https://stackoverflow.com/questions/4426540/mongodb-and-postgresql-thoughts)). Further, the official FAQ clearly distinguishes PostgreSQL from non-relational database implementations ([FAQ](https://www.postgresql.org/about/press/faq/)).
+
 >  Run a PostgreSQL Server using a Docker image from PostgreSQL Docker Hub page.
 
 Before we were able to run a PostgreSQL server, we first had to install PostgreSQL. Therefore we followed the following steps:
