@@ -251,5 +251,29 @@ Now let us restart the container and database, to check whether the joke is stil
 We use the `docker run ...` command from above to start the container and the `docker exec ...` from above to open up the psql prompt. We can use the `\dt` command to look for our table, but get a message that it did not find any relations. To persist our data, we would need to use a Docker volume.
 
 ## Task 3:
+> How do you need to represent/transform image data to save it to a relational database?
+
+http://agiledata.org/essays/mappingObjects.html
+
+https://stackoverflow.com/questions/1071636/storing-images-on-a-database
+
+https://stackoverflow.com/questions/3748/storing-images-in-db-yea-or-nay
+
+https://stackoverflow.com/questions/6472233/can-i-store-images-in-mysql
+
+https://www.datanamic.com/support/storeimagesinthedatabase.html
+
+https://stackoverflow.com/questions/25400555/save-and-retrieve-image-binary-from-sql-server-using-entity-framework-6
+
+> Look at your own data set:
+> - How is your data structured (you can download and load it from the source. Some of you may use the Keras function to download it).
+> - Explain how you would define your relational database tables in terms of their attributes to save your data. What kind of data types could you use (https://www.postgresql.org/docs/12/datatype.html)
+> - What additional relational database table attributes might make sense to easily query your data (f.e. find all pictures of giraffes) 
+
+
+> - Repeat Task 2 using a sample from your own data set! In case you deal with images, you may want to draw that picture using an appropriate Python package, after you retrieved the image from the database. To make sure, you applied the correct "reverse" transformation. Look here (Image.open from the Pillow Package): https://pillow.readthedocs.io/en/3.0.x/reference/Image.html#PIL.Image.open
+
+
+
 
 ## Task 4:
