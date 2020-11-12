@@ -250,13 +250,6 @@ Now let us restart the container and database, to check whether the joke is stil
 
 We use the `docker run ...` command from above to start the container and the `docker exec ...` from above to open up the psql prompt. We can use the `\dt` command to look for our table, but get a message that it did not find any relations. To persist our data, we would need to use a Docker volume.
 
-### Creating database
-
-The creation of the database worked quite well. The only problem we faced here was, that we had to define autocommits as True in order to create the database. 
-
-### Creating Table
-
-
 ## Task 3:
 
 ## Task 4:
