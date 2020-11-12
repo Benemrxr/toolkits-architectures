@@ -24,15 +24,12 @@ print("Table created successfully........")
 
 
 # Insert Joke 
-
 cursor.execute('''INSERT INTO JOKES(
    ID, JOKE) VALUES 
    (001,'Two fish in a tank. One says: “How do you drive this thing?' )''')
-
 print("Joke successfully added...")
 
 # Get Joke 
-
 cursor.execute('''SELECT * from JOKES''')
 result = cursor.fetchall();
 
@@ -42,5 +39,3 @@ print(joke[1])
 
 #Closing the connection
 conn.close()
-
-
