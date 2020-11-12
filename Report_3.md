@@ -70,7 +70,7 @@ Now whether it is SQL or no-SQL: In my understanding, SQL is, by definition, str
 
 >  Run a PostgreSQL Server using a Docker image from PostgreSQL Docker Hub page.
 
-Before we were able to run a PostgreSQL server, we first had to install PostgreSQL. Therefore we followed the following steps:
+Before we were able to run a PostgreSQL server, we first had to **install** PostgreSQL. Therefore we followed the following steps:
 
 1. Creating the file repository configuration:
 ```console
@@ -92,7 +92,6 @@ $ sudo apt -y install postgresql-12 postgresql-client-12
 ```console
 $ sudo su - postgres
 ```
-
 6. Starting PostgreSQL prompt (if there's a permission problem, try the following creation of a Unix group called docker and add the user postgres to it):
 ```console
 $ psql
@@ -101,7 +100,7 @@ $ psql
 Since this worked well, we now know that PostgreSQL was installed correctly on our machines.
 Now to run a PostgreSQL Server using a docker image, we first downloaded the Docker Image from Docker Hub. We did this by using `docker pull postgres`, but be aware that you have to escape the PostgreSQL prompt. Use `\q` to quit it. 
 
-Then, you might have to do a few steps to so that you can use the Docker daemon with other users, as it always runs on the `root` user. To do this, switch back from the postgres user to your main user and follow this short tutorial: https://docs.docker.com/engine/install/linux-postinstall/. 
+Then, you might have to do a few steps to so that you can use the Docker daemon with other users, as it always runs on the `root` user. To do this, switch back from the postgres user to your main user and follow this short tutorial: [docs.docker.com](https://docs.docker.com/engine/install/linux-postinstall/). 
 
 First, create the `docker` group, which grants privileges equivalent to the `root` user. Be aware of potential impacts on the security of your system. 
 ```console
@@ -138,7 +137,9 @@ To connect to our PostgreSQL database, we install the package `psycopg2`. Since 
 >- Selects your favorite joke (now in the database), and fetches it from the database
 >- Prints your favorite joke. You should see your joke in it's full glory.
 
-Our python script is called `jokes.py`. We use the package `psycopg2` to connect to our PostgreSQL database. Install the current version thereof with the code below from the Python Package Index software repository.
+Our python script is called `jokes.py`. 
+
+We use the package `psycopg2` to connect to our PostgreSQL database. Install the current version thereof with the code below from the Python Package Index software repository.
 ```console
 $ pip install psycopg2==2.8.6
 ```
@@ -149,7 +150,7 @@ $ sudo apt-get install python3-psycopg2
 
 In order to build a connection we use the function `psycopg2.connect()` from the package described above. Therefore we need several parameters:
 
-1. Name of the database
+1. Name of the database (as *dbname*)
 2. User
 3. Host
 4. Password
@@ -168,6 +169,50 @@ To show our table we can use the command `\dt`. That gives us this output:
        public |      jokes  |      table  |      postgres
        (1 row)
 
+We build the connection with the following code:
+```console
+conn = psycopg.connect("dbname='postgres' user='postgres' host='172.17.0.2' password='mysecretpassword' port='5432'")
+conn.autocommit = True
+```
+For some reason, we had to define `autocommit` as `True` in order to create the database.
+
+We then create a cursor object using the cursor() method:
+```console
+cursor = conn.cursor()
+```
+Then prepare a query to create our database. We execute this through the cursor object:
+```console
+database = '''CREATE database ms3_jokes'''
+cursor.execute(database)
+print("Database created successfully........")
+```
+Now, we want to create a table called "jokes". The table should have an attribute "ID" which is it's primary key and another Attribute "JOKE" of character type "TEXT".
+```console
+table ='''CREATE TABLE JOKES(
+   ID INT,
+   JOKE TEXT
+)'''
+cursor.execute(table)
+print("Table created successfully........")
+```
+To insert our favorite joke in it:
+```console
+cursor.execute('''INSERT INTO JOKES(
+   ID, JOKE) VALUES 
+   (001,'Two fish in a tank. One says: “How do you drive this thing?' )''')
+print("Joke successfully added...")
+```
+Select the favorite joke and fetch it from the database:
+```console
+cursor.execute('''SELECT * from JOKES''')
+result = cursor.fetchall()
+```
+Lastly, print the joke for us to see:
+```console
+joke = result[0]
+print(joke[1])
+```
+The command at the end of the file closes the connection again with `conn.close()`.
 
 >  Download the PGADMIN Tool (https://www.pgadmin.org/download/). It also exists as a Docker Image :). Connect to your running PostgreSQL Database. Can you see your database and table?
 
@@ -175,7 +220,7 @@ We can pull the Docker Image of the `pdAdmin tool` from Docker Hub with the Dock
 ```console
 $ docker pull dpage/pgadmin4
 ```
-This will certainly be a useful inclusion in our docker container, but for our current purposes we are better suited with a direct installation from the pgAdmin website: https://www.pgadmin.org/download/. Alternatively, we can use pip to install it from the PyPi with `pip install pgadmin4`. To do this, we need to create a virtual environment, as laid out in https://www.pgadmin.org/download/pgadmin-4-python/. Then, we configure our local user with `$ pgadmin4` and use `user@domain.com` for the email and `mysecretpassword` for the password. Now the pgAdmin 4 tool start and we can navigate to http://127.0.0.1:5050 in our browser.
+This will certainly be a useful inclusion in our docker container, but for our current purposes we are better suited with a direct installation from the pgAdmin website: https://www.pgadmin.org/download/. Alternatively, we can use pip to install it from the `PyPi` with `pip install pgadmin4`. To do this, we need to create a virtual environment, as laid out in https://www.pgadmin.org/download/pgadmin-4-python/. Then, we configure our local user with `$ pgadmin4` and use `user@domain.com` for the email and `mysecretpassword` for the password. Now the pgAdmin 4 tool start and we can navigate to http://127.0.0.1:5050 in our browser.
 
 From there, we can **add a new server** on the **dashboard** tab. In the **create - server** dialog box, we type a name in the **general** tab to identify our server in pgAdmin. We name it jokes, for example. On the **connection** tab, we type information for the **host** (IP), **port** (5432), **username** (postgres) and **password** (mysecretpassword). We choose **save** and can access our database in the pgAdmin browser by expanding server. 
 
