@@ -253,6 +253,19 @@ We use the `docker run ...` command from above to start the container and the `d
 ## Task 3:
 > How do you need to represent/transform image data to save it to a relational database?
 
+Previously, we were just using **text files** with our database. The `jokes.py` file is such a kind of computer file, that is structured as a sequence of lines of electronic text. Image data however, is stored differently, that is to say in **non-text files**, also called **binary files**. They can be thought of a being a sequence of `bytes` - `bits` in groups of eight ([wikipedia.org, binary file](https://en.wikipedia.org/wiki/Binary_file)). 
+
+The problem is, that it is not good practice to store large binary objects, *BLOBs*, in a database. They are unstructed and opaque, and seemingly it just **bloats** the database without much of an advantage.
+
+A better way is to store the BLOBs on a separate file server and make sure to keep a connection to it in our database, i.e. save the path  of the image in the database in a text column.
+
+For small image data or if such a filesystem is not available, we can make use of the `bytea` column, that is also available in PostgreSQL. For example ([so.com, JeyJ and Yan](https://stackoverflow.com/questions/61044064/insert-image-in-a-database-in-postgres)):
+```console
+insert into images(image_name, image_raw) values('image.png', bytea('D:\image.jpg'));
+```
+
+Maybe add comment about `FILESTREAM`? Any changes since '08 when most of the Stackoverflow content was created?
+
 http://agiledata.org/essays/mappingObjects.html
 
 https://stackoverflow.com/questions/1071636/storing-images-on-a-database
