@@ -268,29 +268,25 @@ For small image data or if such a filesystem is not available, we can make use o
 insert into images(image_name, image_raw) values('image.png', bytea('D:\image.jpg'));
 ```
 
-Maybe add comment about `FILESTREAM`? Any changes since '08 when most of the Stackoverflow content was created?
-
-http://agiledata.org/essays/mappingObjects.html
-
-https://stackoverflow.com/questions/1071636/storing-images-on-a-database
-
-https://stackoverflow.com/questions/3748/storing-images-in-db-yea-or-nay
-
-https://stackoverflow.com/questions/6472233/can-i-store-images-in-mysql
-
-https://www.datanamic.com/support/storeimagesinthedatabase.html
-
-https://stackoverflow.com/questions/25400555/save-and-retrieve-image-binary-from-sql-server-using-entity-framework-6
-
 > Look at your own data set:
 > - How is your data structured (you can download and load it from the source. Some of you may use the Keras function to download it).
 > - Explain how you would define your relational database tables in terms of their attributes to save your data. What kind of data types could you use (https://www.postgresql.org/docs/12/datatype.html)
 > - What additional relational database table attributes might make sense to easily query your data (f.e. find all pictures of giraffes) 
 
+As described in the first milstone, the dataset assigned to us was constructed for a sentiment analysis publication from a collection of reviews from IMDB. The authors Maas et al. released this dataset to the public, it can be found online (https://ai.stanford.edu/~amaas/data/sentiment/) and in their paper (https://ai.stanford.edu/~amaas/papers/wvSent_acl2011.pdf). We can also directly load it with `Keras`, as it is included in the `tf.keras.dataset` module (https://keras.io/api/datasets/imdb/). 
+
+```console
+from keras.datasets import imdb
+```
+The data set is structured as follows. The core dataset contains 50,000 reviews split evenly into 25k train and 25k test sets. The overall distribution of labels is balanced (25k pos and 25k neg). Also included are an additional 50,000 unlabeled documents for unsupervised learning. Check out our first milestone for a more detailed description of the movie collection. What is important, is that there are two top-level directories [train/, test/] corresponding to the training and test sets. Each contains [pos/, neg/] directories for the reviews with binary labels positive and negative. Within these directories, reviews are stored in text files named following the convention [[id]_[rating].txt] where [id] is a unique id and [rating] is the star rating for that review on a 1-10 scale. The directiory [train/unsup/] has 0 for all ratings, as they are omitted. 
+
+Further, the authors include the [imdb.com](www.imdb.com) URLSs for each reviewq in a seperate text file. Find more information on the official [site](https://ai.stanford.edu/~amaas/data/sentiment/).
+
+The reviews are a sequence of words. They come preprocessed as a sequence of integers, where each integer stands for a specific word in the dictionary. As we cannot feed a list of integers into our deep neural network, we need to convert them into tensors. Rakshit from towardsdatascience.com has a nice tutorial on preparing the data for a neural network ([link](https://towardsdatascience.com/binary-classification-of-imdb-movie-reviews-648342bc70dd)).
+
+As far as the data type from https://www.postgresql.org/docs/12/datatype.html is concerned, it can be classified as a [binary data type](https://www.postgresql.org/docs/12/datatype-binary.html). The `bytea` data type allows storage of binary strings.
 
 > - Repeat Task 2 using a sample from your own data set! In case you deal with images, you may want to draw that picture using an appropriate Python package, after you retrieved the image from the database. To make sure, you applied the correct "reverse" transformation. Look here (Image.open from the Pillow Package): https://pillow.readthedocs.io/en/3.0.x/reference/Image.html#PIL.Image.open
-
-
 
 
 ## Task 4:
