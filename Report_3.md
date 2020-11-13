@@ -282,12 +282,13 @@ The data set is structured as follows. The core dataset contains 50,000 reviews 
 
 Further, the authors include the [imdb.com](www.imdb.com) URLSs for each reviewq in a seperate text file. Find more information on the official [site](https://ai.stanford.edu/~amaas/data/sentiment/).
 
-The reviews are a sequence of words. They come preprocessed as a sequence of integers, where each integer stands for a specific word in the dictionary. As we cannot feed a list of integers into our deep neural network, we need to convert them into tensors. Rakshit from towardsdatascience.com has a nice tutorial on preparing the data for a neural network ([link](https://towardsdatascience.com/binary-classification-of-imdb-movie-reviews-648342bc70dd)).
+The reviews are a sequence of words. They come preprocessed as a sequence of integers, where each integer stands for a specific word in the dictionary. As we cannot feed a list of integers into our deep neural network, we need to convert them into tensors. Rakshit from towardsdatascience.com has a nice tutorial on preparing the data for a neural network ([link](https://towardsdatascience.com/binary-classification-of-imdb-movie-reviews-648342bc70dd)). To get the text instead of the integres, we can reverse the transformation via retrieving the dictionary mapping word indices back to the original words, f.e. through the following code applied on one observation: index = imdb.get_word_index() reverse_index = dict([(value, key) for (key, value) in index.items()]) decoded = ” “.join( [reverse_index.get(i - 3, “#”) for i in x_train[0]] ) print(decoded).
 
 As far as the data type from https://www.postgresql.org/docs/12/datatype.html is concerned, it can be classified as a [binary data type](https://www.postgresql.org/docs/12/datatype-binary.html). The `bytea` data type allows storage of binary strings.
 
 > - Repeat Task 2 using a sample from your own data set! In case you deal with images, you may want to draw that picture using an appropriate Python package, after you retrieved the image from the database. To make sure, you applied the correct "reverse" transformation. Look here (Image.open from the Pillow Package): https://pillow.readthedocs.io/en/3.0.x/reference/Image.html#PIL.Image.open
 
+The file `postgres.py` was created for this task, but we get an error that we couldn't solve. Postponed for next week... :tired_face:
 
 ## Task 4:
 
@@ -375,7 +376,6 @@ We used the following query command in order to load the sample once again. In t
 
 To save the predictions, created the following command, which is quite similar to the one for the sample data:
 
-
 ```
 l = tuple(prediction)
 
@@ -402,7 +402,3 @@ To make sure, whether the containers start up in their right order, we used the 
 > Additional comment on task 4:
 
 Since we spent almost everyday of the first week to correct stuff from the last milestone in order to make this milestone possible and we do not have much experience in the whole computer science and programing world, we decided to put the focus here on the code. We tried to write down the code as logically as possible and then try it out in the Docker-Compose as a whole. We know that this is not the way to do it but we simply do not have that much experience in with it. As it was to expect, we got several errors, for which we simply did not have enough time to solve them or even to write an issue. We would have to write tons of issues and we do not have enough time for that. Since it was written on the project paper, that we should start early, we did this and started in on monday after the distribution of the project. We still did not have enough time, even though we spend almost all of our spare time (after other courses) to work for this and project. We are not lazy, we just do not have the expected experience in computer science for this projects. 
-
-
-
-
