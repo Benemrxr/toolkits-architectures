@@ -1,14 +1,34 @@
 version: "3.8"
 services:
-  web:
-    build: .
-    ports:
-      - "5000:5000"
+
+  postgres:
+    image: "postgres:12.4"
+    container_name: "database"
     volumes:
-      - .:/code
+      - pgdata:/var/lib/postgresql/data #persisting the database
     environment:
-      FLASK_ENV: development
-  redis:
-    image: "redis:alpine"
-  pgadmin:
-    image: "dpage/pgadmin4:latest"
+      - POSTGRES_USER=someuser
+      - POSTGRES_PASSWORD=somepassword
+      - POSTGRES_DB=database
+
+  pyexec:
+    build: "./pyexec"
+    volumes:
+      - ./ml_data:/data
+    depends_on: 
+        - postgres
+        - pyml
+        
+  pyml:
+    build: "./pyml"
+    volumes:
+      - ./ml_data:/data
+
+
+
+
+
+volumes:
+  pgdata:
+  
+
