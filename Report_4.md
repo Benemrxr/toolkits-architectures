@@ -1,6 +1,8 @@
 # Milestone 4: Group Marxer, Kotatis, Rohrer
 Hey! :wave: This report documents our progress for the milestone number :four:
 
+FYI: Our final branch (*feature-project-4*) was not a clone but a copy of the *master* branch. This led to us being unable to do a pull request. We created a new branch (*release4*) for the pull request, which is created as one commit on top of the master branch. If you are interested in the commit history, check out the old *feature-project-4* branch. Next milestone, we'll be more careful in this regard.
+
 ## Structure:
 - Before we start
 - Task 0
