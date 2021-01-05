@@ -14,15 +14,21 @@ data-driven product.**
 > - How can you train a predictive model? How could you manage experiments,
 and create reports/visualizations while training your model
 
+To develop a data-driven product, we can train predictive models. In this course, we got to know the Tensorflow framework and the Keras library, which we can use to build and train predictive models. For our projects, we got assigned a codebase from the Keras-team, with binary data. 
+
+We could manage experiments with the Weights & Biases tool, where we played around with our model, adjusted parameters and measured the changes. You can check out our runs [here](https://wandb.ai/janikrohrer/Project_3?workspace=user-benemrxr).
+
+Using the Jupyter Notebook tool, we could create reports/visualizations while training our model. You can check out our .ipynb file in the repository. We can use the Markdown language to add explanations in our notebook and use it to create project reports, such as this document. 
+
 > - How can you improve collaboration in a team?
 
 We got to know quite a few tools to improve collaboration in a team. I remember, that in previous courses, we used file hosting services such as OneDrive to share files and messaging apps such as WhatsApp for coordination. Appropriate for small group tasks, but quite cumbersome for bigger projects, when multiple people make changes to the shared documents. 
 
-Over the last months, we were introduced to Slack, a channel-based messaging platform, where a workspace was set up for the course communication. We continued to use the application for coordination within our group, as it was easy to set it up simultaneously on our main operating system and the virtual machine, and to share the feedback documents. For quick messages, we used a group chat on WhatsApp. The use of Slack definitely improved the coordination and collaboration in a team.
+Over the last months, we were introduced to Slack, a channel-based messaging platform, where a workspace was set up for the course communication. We continued to use the application for coordination within our group, as it was easy to set it up simultaneously on our main operating system and the virtual machine, and to share the feedback documents. For quick messages, we used a group chat on WhatsApp. The use of Slack definitely improved the coordination and collaboration in our team, and we are confident in making use of Slack or a Slack-like tool if we were to develop a data-driven product.
 
-For the actual project work, we were introduced to Git and the GitHub platform. GitHub is a code hosting platform for version control, using Git. A big improvement over sharing files on a cloud service! We stored all required code files in our public repository, as well as the project report documents, written in Markdown, so that we can write the reports simultaneously and independent from each others progress.
+For the actual project work, we were introduced to Git and the GitHub platform. GitHub is a code hosting platform for version control, using Git. A big improvement over sharing files on a cloud service! We stored all required code files in our public repository, as well as the project report documents, written in Markdown, so that we can write the reports simultaneously and independent from each others progress. To develop a data-driven product, we would surely make use of GitHub for code versioning and review.
 
-... to be continued ...
+**_additional tools?_**: Python Notebooks? Weights & Biases? Docker?
 
 > - How would you assess and ensure the quality of your code?
 
