@@ -1,0 +1,66 @@
+# Milestone 5: Group Marxer, Kotatis, Rohrer
+Hey! :wave: This report documents our progress for the final milestone number :five:
+
+## Structure:
+- Task 1
+- Task 2
+- Deliverables
+
+
+
+## Task 1: 
+> **Describe how you might use the tools you learned in this course to develop a
+data-driven product.**
+> - How can you train a predictive model? How could you manage experiments,
+and create reports/visualizations while training your model
+
+> - How can you improve collaboration in a team?
+
+> - How would you assess and ensure the quality of your code?
+
+> - How can you provide data to the model at inference time and save its
+predictions to analyze the model’s performance in a real-world scenario?
+
+> - How can you improve on the model iteratively and deploy it to customers in
+a web application. How could you structure your product as a microservice
+architecture
+
+> - Describe the process step by step with the example of an E-mail spam
+detector. Assume you want to provide a service where customers can send
+their E-mails to (f.e. a web page where you can upload E-mail text). The
+service responds with either “Spam” or “No Spam”. Which tools would you
+use for each step in the process until the response ends up at the
+customers’ screens? Also describe what metrics you might use to find out
+whether your model works (f.e. would you focus on Precision or Recall?
+Etc.)
+
+
+
+## Task 2:
+> **Use Flask to make your model available through a web application. Your code
+should:**
+> - Accept a HTTP POST Request at “localhost:<port>/predict” (the route you
+should implement with Flask). The body of the POST request contains a
+sample of your data set (an image, time series data or text data, etc.).
+Think about how you have to encode your data (Base64? JSON? Etc.).
+
+> - Within the predict route, you should load your .h5 model with Keras
+
+> - Perform inference on your model with the data provided in the Body of the
+POST Request (you need to transform the data to its proper representation
+so you can feed it into the loaded Keras model)
+
+> - Save the prediction to a PostgreSQL DB (only the prediction. This means
+you only need one table, that has an ID and the predicted label/value)
+
+> - Return the prediction to the sender of the HTTP POST request
+
+> - There should be two Docker container communicating with each other (your
+Flask app, and the PostgreSQL DB). Use docker-compose to start both
+containers
+
+## Deliverables:
+- Check the three requirements before submitting the project: 
+- [ ] Run ‘docker-compose up’ to start applications
+- [ ] Create a virtual environment based on our requirements file
+- [ ] Run the Python script that sends the HTTP POST Request. A print of the prediction of our model is expected
