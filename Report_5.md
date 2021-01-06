@@ -5,6 +5,7 @@ Hey! :wave: This report documents our progress for the final milestone number :f
 - Task 1
 - Task 2
 - Deliverables
+- Misc
 
 
 
@@ -56,6 +57,11 @@ customers’ screens? Also describe what metrics you might use to find out
 whether your model works (f.e. would you focus on Precision or Recall?
 Etc.)
 
+If we want to provide a web site that checks whether an uploaded E-mail might be spam or not, we can create a Python program in the background (back-end), with a binary classifier model. We can use Flask to assure a front-end environment that handels RESTful requests. With Docker, we can deploy the Flask web application. Moving along, we cann add Funicorn, a production-grade WSGI server, and then add Nginx to act as a reverse proxy for Gunicorn to handle client requests as well as serve up static files.
+
+Deployment: web app back-end, web app front-end and the web browser of the customer. REST API, dockerize with Web Server.
+
+
 
 
 ## Task 2:
@@ -86,3 +92,6 @@ containers
 - [ ] Run ‘docker-compose up’ to start applications
 - [ ] Create a virtual environment based on our requirements file
 - [ ] Run the Python script that sends the HTTP POST Request. A print of the prediction of our model is expected
+
+## Misc:
+[ ] Improve GitHub community profile, add README etc. as recommended.
