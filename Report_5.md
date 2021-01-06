@@ -32,6 +32,14 @@ For the actual project work, we were introduced to Git and the GitHub platform. 
 
 > - How would you assess and ensure the quality of your code?
 
+We were introduced to the Python Enhancement Proposals in this course. The [PEP 8](https://www.python.org/dev/peps/pep-0008/) is a style guide for Python code, through which we can ensure some consistency and therefore readability. Code is read much more often than written, so a consistent style is greatly needed when we go over the code to assess its quality. In another course in this semester, we were looking at Python docstrings and their high-level structure: what they should contain and how they should be written. If we were to develop a data-driven product, it would be smart to take proper use of docstrings, adhering to the [PEP 257](https://www.python.org/dev/peps/pep-0257/) on docstring conventions.
+
+Further, we can use software testing methods to ensure the quality of our code. We could start out with black-box testing, as based on the docstring specification, and also glass-box testing by going through the potential paths of the program. We can do this at the unit level, followed by integration testing. 
+
+If there are any flaws that arise in testing, we can use debugging methods to fix them. For example, we add print statements mid-code, to narrow in the location of the bug.
+
+If we want to improve the quality even further, we could try to improve the performance of our programs and their implementation. The former, using the WandB tool, for example.
+
 > - How can you provide data to the model at inference time and save its
 predictions to analyze the model’s performance in a real-world scenario?
 
