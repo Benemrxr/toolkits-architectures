@@ -36,7 +36,7 @@ We were introduced to the Python Enhancement Proposals in this course. The [PEP 
 
 Further, we can use software testing methods to ensure the quality of our code. We could start out with black-box testing, as based on the docstring specification, and also glass-box testing by going through the potential paths of the program. We can do this at the unit level, followed by integration testing. 
 
-If there are any flaws that arise in testing, we can use debugging methods to fix them. For example, we add print statements mid-code, to narrow in the location of the bug.
+If there are any flaws that arise in testing, we can use debugging methods to fix them. For example, we add print statements mid-code, to narrow in the location of the bug. Better yet, we can use assertions as a defensive programming tool, to confirm that the arguments to a function are of appropriate types. Or to confirm that intermediate values have the expected values or that a function returns an acceptable value.
 
 If we want to improve the quality even further, we could try to improve the performance of our programs and their implementation. The former, using the WandB tool, for example.
 
