@@ -63,7 +63,7 @@ customers’ screens? Also describe what metrics you might use to find out
 whether your model works (f.e. would you focus on Precision or Recall?
 Etc.)
 
-If we want to provide a web site that checks whether an uploaded E-mail might be spam or not, we can create a Python program in the background (back-end), with a binary classifier model. We can use Flask to assure a front-end environment that handels RESTful requests. With Docker, we can deploy the Flask web application. Moving along, we can add Gunicorn, a production-grade WSGI server, and then add Nginx to act as a reverse proxy for Gunicorn to handle client requests. Step-by-step:
+If we want to provide a web site that checks whether an uploaded E-mail might be spam or not, we can create a Python program in the background (back-end), with a binary classifier model. We can use Flask to assure a front-end environment that handels RESTful requests. With Docker, we can deploy the Flask web application. Moving along, we can add Gunicorn, a production-grade WSGI server, and then add Nginx to act as a reverse proxy for Gunicorn to handle client requests. Step-by-step :e-mail::
 
 1) We begin by building a binary classifier model, to check whether the uploaded email might be spam or not. We use Python and ideally have some (lots of) email data ready. We then classify the emails manually as spam or no spam, so that we have labeled data to train our model. Our model might be based on a k-nearest neighbor algorithm, where an object is classified by a plurality vote of its neighbors. Knn is thus a supervised learning algorithm. We take advantage of the research in the field of classification algorithms, specifically this paper from [Dada et. al, on Machine learning for email spam filtering: review, approaches and open research problems](https://doi.org/10.1016/j.heliyon.2019.e01802).
 
@@ -207,9 +207,10 @@ Last but not least, we put all of our dependencies into a "requirements.txt" fil
 
 ## Deliverables:
 - Check the three requirements before submitting the project: 
-- [ ] Run ‘docker-compose up’ to start applications
-- [ ] Create a virtual environment based on our requirements file
+- [x] Run ‘docker-compose up’ to start applications
+- [x] Create a virtual environment based on our requirements file
 - [ ] Run the Python script that sends the HTTP POST Request. A print of the prediction of our model is expected
 
 ## Misc:
-[ ] Improve GitHub community profile, add README etc. as recommended.
+- [x] Cleaned up Git Repository / folder structure. Three folders :file_folder:: reports for the report documents, experiments for the Jupyter Notebook files that we used to train our models, and a src folder for all the code. We have a subfolder structure in the src folder, but we can change that for the final deliverable, if that is not recommended. 
+- [ ] Improve GitHub community profile, add README etc. as recommended by GitHub. -> will be done for the final submission :clipboard:

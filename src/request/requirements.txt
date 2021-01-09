@@ -3,3 +3,5 @@ tensorflow == 2.3.1 --hash=sha256:87750a476aa6f76b3aad5e6182faf2a3036a3d4c0db3b6
                     --hash=sha256:87b62ab25816597a5e5352604b383b292eafd19a33ae7848b5275ea74fc4da1d
 requests == 2.25.1  --hash=sha256:c210084e36a42ae6b9219e00e48287def368a26d03a048ddad7bfee44f75871e \
                     --hash=sha256:27973dd4a904a4f13b263a19c866c13b92a39ed1c964655f025f3f8d3d75b804
+astunparse == 1.6.3 --hash=sha256:c2652417f2c8b5bb325c885ae329bdf3f86424075c4fd1a128674bc6fba4b8e8 \
+                    --hash=sha256:5ad93a8456f0d084c3456d059fd9a92cce667963232cbf763eac3bc5b7940872
