@@ -6,4 +6,3 @@ tensorflow == 2.3.1 --hash=sha256:87750a476aa6f76b3aad5e6182faf2a3036a3d4c0db3b6
 psycopg2-binary == 2.8.6    --hash=sha256:8cd0fb36c7412996859cb4606a35969dd01f4ea34d9812a141cd920c3b18be77 \
                             --hash=sha256:2dac98e85565d5688e8ab7bdea5446674a83a3945a8f416ad0110018d1501b94 \
                             --hash=sha256:ba381aec3a5dc29634f20692349d73f2d21f17653bda1decf0b52b11d694541f
-                            --hash=sha256:ba381aec3a5dc29634f20692349d73f2d21f17653bda1decf0b52b11d694541f
