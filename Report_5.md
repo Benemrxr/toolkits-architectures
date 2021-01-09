@@ -52,6 +52,8 @@ To provide data to the model, we could either scrape more reviews from the inter
 a web application. How could you structure your product as a microservice
 architecture
 
+Our model uses 2 epochs, meaning there are 2 iterations to build the model (more epochs don’t really improve metrics and could even lead to overfitting and even worsen). We can use flask as a tool to deploy it as a web application for our customers. We would have backend and front end as our architecture (backend: our model, flask, docker, DB; frontend: web app and its UI, docker, nginx). A great benefit of using microservices is, that they loosely connect via APIs to form a microservices-based application architecture. This architecture offers greater agility and pluggability because we can develop, deploy, and scale each microservice independently. We could have a microservice in (todo: thinking of some plausible microservices)
+
 > - Describe the process step by step with the example of an E-mail spam
 detector. Assume you want to provide a service where customers can send
 their E-mails to (f.e. a web page where you can upload E-mail text). The
