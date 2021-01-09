@@ -8,7 +8,7 @@ from flask import abort
 import numpy as np
 import os.path
 import logging
-#import base64
+import base64
 import json
 import sys
 
@@ -26,10 +26,10 @@ logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 app = Flask(__name__)
 mlmodel = MlModel(filepath="/data/model.h5")
 db = Database()
-path = "/data/model.h5"
 
 
 def init():
+    path = "/data/model.h5"    
     logging.info("Init...")
 
     # build the model with the supplied data
@@ -63,11 +63,8 @@ def index():
     # redirect to our predict-route in case someone makes a call to root
     return redirect(url_for('predict'))
 
-@app.route('/predict', methods=['POST']) #'GET', 
+@app.route('/predict', methods=['POST'])
 def predict():
-    # specify the path where our model gets stored
-    path = "/data/model.h5"
-    
     logging.info("Called route /predict (POST)...")
 
     data = np.array(json.loads(request.data))
