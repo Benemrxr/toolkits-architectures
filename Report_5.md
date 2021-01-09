@@ -78,25 +78,136 @@ Back to the metrics. A very popular metric for performance evaluation of classif
 ## Task 2:
 > **Use Flask to make your model available through a web application. Your code
 should:**
+
+> - Initialize everything
+
+In order to make our code as structured as possible, we decided to implement a 'init()' function to set up everything we need for this task. Our goal was to first check, whether our model is already stored somewhere as a .h5 file. If not, we load our imdb data, build our model and save it as .h5 file. This way, our model has to be build only for the first time and we can load the .h5 file for all the following runs. 
+
+Before we were able to build up our model, we rearranged our 'load_sample_data()'function in our model.py file, in order to use all of the data to build up our model (compared to our last milestone). Once we had done this, we used a simple if-else condition to check whether the model was already stored or not. If the model does not exist, we build a new one and save it as .h5. If it does exist, we simply load it from the path. 
+
+We further used our init() function to connect to our PostgresSQL Database. Therefore we used our 'connect()' function, which we also defined in our previous task.
+
 > - Accept a HTTP POST Request at “localhost:<port>/predict” (the route you
 should implement with Flask). The body of the POST request contains a
 sample of your data set (an image, time series data or text data, etc.).
 Think about how you have to encode your data (Base64? JSON? Etc.).
 
+First we build up the basic Flask framework, we found on the internet, inside our 'main.py'. We defined the host as "0.0.0.0 (localhost) and startet to define two functions in our web app:
+
+1. predict ():
+
+The predict function is the main function which accepts the POST request at /predict. We further defined 'methods=['POST']' in order to accept POST requests only. 
+
+2. index():
+
+The second function is not expected in the task, but we wanted to try our best to avoid errors. Therefore we implemented this function, which catches the case if someone makes a call to root. For this case, we simply redirect the user to '/predict'. 
+
+> - How to encode our data?
+
+In order to send a test sample to our application, we decided to encode our data with JSON. We choose JSON, because this was the only encoding that we have already heard of. To encode and decode our data, we import the python module 'json'. We decode the data we get from the POST request and convert it to a numpy array with the command:
+
+```
+np.array(json.loads(request.data))
+```
+
+Numpy arrays are the type of data which can be used to "feed" our sample data to our ML-model. Thats why we used a numpy array here. 
+
 > - Within the predict route, you should load your .h5 model with Keras
+
+As described above, we decided to load (or build) our ML-model inside of our 'init()' function. So, we are already able to access the model inside of our predict route. 
 
 > - Perform inference on your model with the data provided in the Body of the
 POST Request (you need to transform the data to its proper representation
 so you can feed it into the loaded Keras model)
 
+In order to feed our model with the provided data, we first had to transform it to a 2D numpy array. This is the represantation which our model is able to use. As explained above, we implemented this process to the function where we loaded the provided data. We then assigned this numpy array to the variable "data". To make the predictions with our model, we simply feeded this numpy array to our model with:
+
+```
+ mlmodel.model.predict(data)
+```
+
+We then assigned the predictions, which are also a numpy array to the variable "predictions" in order to use them in the following steps.
+
 > - Save the prediction to a PostgreSQL DB (only the prediction. This means
 you only need one table, that has an ID and the predicted label/value)
 
+For the use of the database, we already have many useful functions created in our previous milestones. Before we started to use them, we wanted to simplify the use of these functions. Therefore we formed a class called 'Database()'. One step further to achieving a good pratice. 
+
+We first created the database inside of our 'init(). Therefore we use the function 'create_database()', which we already defined in our last milestone and is now part of our Database-class. We then close the connection again and re-connect to the created database.
+
+To create the new table as expected in the task, we transformed our function from the last milestone so that it creates the table as described in the task. We further renamed this updated function as 'create_predefined_table()' to avoid misunderstandings. Finally, we called this function inside of our predict route. 
+
+To insert our predictions into our created table, we again had to serialize our data, as always when working with the database. Therefore, we also had a function created in a previous milestone, which we could simply import and use. This 'serializer()' function makes it possible to save the data in our database, since PostgreSQL is not able to store numpy arrays. We then used the serialized array as a parameter for our 'insert_predictions()' function and store the predictions this way into our database.
+
 > - Return the prediction to the sender of the HTTP POST request
+
+To send the data back, we have to encode it as JSON again. We use the function 'json.dumps()'. But here we got into troubles, since it is not possible to send numpy arrays in the JSON format. With the help of the internet, we found a solution for this problem. We used the function 'tolist()'to transform our numpy array to a python list. We then used this list as a parameter for the 'json.dumps()' function. This way we are able to send our predictions back to the user. 
 
 > - There should be two Docker container communicating with each other (your
 Flask app, and the PostgreSQL DB). Use docker-compose to start both
 containers
+
+Basically, we need to create two containers here. One for the Flask app and one for our database:
+
+1. Flask App
+
+For our flask app, we had to create a Dockerfile to run the Python script on a Docker-container. Therefore we used previous dockerfiles as a template. Since we are working with Flask, we had to add one expression to our Dockerfile:
+
+```
+ENV FLASK_APP=/src/main.py
+ 
+```
+This is used to tell Flask, which file has to be used as entrypoint. 
+
+We save this Dockerfile in the same direction as our web application. This way, we could later on run the container from our "docker-compose.yml" file. 
+
+We then created our "docker-compose.yml" file. As well as for the previous Dockerfile, we used the file from the last milestone as a template. We first added a new service (pyapi) to build up and run our Dockerfile which we created for the web-application. We added the depends_on attribute to be sure, that this container waits until the database is build up. We did this to avoid errors, that occur because the database is not ready. 
+
+For our database, we simply used the same expressions as we did in our previous milestone, since the database itself has not fundamentally changed. Only the tables inside of the database are new.
+
+During our first test as a whole, we got the following error:
+
+```
+ERROR: The Compose file './docker-compose.yml'is invalid because: network.internal value 'enable_ipv6' does not match any of the regexes: '^x-'
+```
+After a few minutes of googleing and tryout, we found the solution for our problem. We changed our driver from "overlay" to "bridge" in order to run docker-compose in the single mode instead of the swarm mode. Now it worked quite well.
+
+ 
+> Write a script that uses the "request" library to extract a sample and sends a HTTP POST Request.
+
+To get a prediction for a sample, we first need a sample of the data which can then be used for our prediction. Therefore we created the function 'load_imdb_sample()' We wanted to be able to tryout different samples. Therefore we build up the function in a way that makes it possible for us to pick a specific sample by the index (Parameter "start").
+We then called this function we defined in the same script with the value 373. This gives us the 373th datapoint of the whole imdb datapackage. This is our sample, that we can send to predict. However we can always change this number to get different predictions.
+
+In order to send this sample to our web application, we again had to encode it in the same way as we did it before. We again used the function: 
+
+```
+json.dumps(sample.tolist())
+```
+This way we kind of "prepared" the sample to be sent. This is also the dataformat we recive on the other side and transform to the numpy array (as you might remember). 
+
+Finally everything was ready to go for the HTTP POST request. For the request, we used the following function to make a POST request with the data we prepared before:
+
+```
+response = requests.post(endpoint, data = data)
+ 
+```
+The endpoint here was defined as 'http://localhost:80/predict'.
+We were then able to write the last command to printout the response we should get (hopefully a prediction). Therefore we used the following function:
+
+```
+print('Response (took %ss): %s' % (response.elapsed.total_seconds(), response.text)) 
+```
+We further built in a time measurement to tell how long it took to get the response. Now everything was set up and we made our first attempt to run our request. 
+
+As expected: ERROR!
+
+"listen tcp 0.0.0.0:80: bind: adress is already in use".
+
+To be honest, we had no idea how this could have happened but something blocked the port 80. We decided to solve this problem in the most basic way we knew: To change the port to 81. Of course we also had to change the port for the application inside of our "docker-compose.yml" file. After we did this, everything worked well and we were able to successfully print out the result of our prediction. 
+
+Voila our web application works!!
+
+Last but not least, we put all of our dependencies into a "requirements.txt" file, which can be used to quickly install all the necessary dependencies at once.
 
 ## Deliverables:
 - Check the three requirements before submitting the project: 
