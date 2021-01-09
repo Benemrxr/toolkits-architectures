@@ -26,6 +26,7 @@ logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 app = Flask(__name__)
 mlmodel = MlModel(filepath="/data/model.h5")
 db = Database()
+path = "/data/model.h5"
 
 
 def init():
