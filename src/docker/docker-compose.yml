@@ -1,0 +1,45 @@
+# Specify Compose file version. 
+version: "3.8"
+
+# Configure our Services. The service-names (pyml, postgres, etc.) also represent their hostnames
+services:
+  pyapi:
+    build: "./pyapi"
+    depends_on: 
+        - postgres
+    ports: 
+        - "81:5000"
+    hostname: api.fancy
+    networks:
+      internal:
+        aliases:
+          - api.fancy # Whatever name the container will get, it will always be reachable under the given aliases.
+      default: # make the container reachable from the outer world, only for debugging purposes
+    volumes:
+      - mldata:/data # Persisting and sharing the model between the containers
+    environment:
+      - TF_CPP_MIN_LOG_LEVEL=2 # Disable Tensorflow info and warning messages 
+
+  postgres:
+    image: "postgres:12.4"
+    networks:
+      internal:
+        aliases:
+          - database # Whatever name the container will get, it will always be reachable under the given aliases.
+    volumes:
+      - pgdata:/var/lib/postgresql/data # Persisting the database
+
+    environment:
+      - POSTGRES_USER=someuser
+      - POSTGRES_PASSWORD=somepassword
+
+#Define the networks.
+networks:
+  # Internal network for our database. No one outside needs direct access to it (security)
+  internal:
+    internal: true
+    driver: bridge
+
+volumes:
+  pgdata: # persisting the database
+  mldata: # persisting the model data
