@@ -29,8 +29,6 @@ Over the last months, we were introduced to Slack, a channel-based messaging pla
 
 For the actual project work, we were introduced to Git and the GitHub platform. GitHub is a code hosting platform for version control, using Git. A big improvement over sharing files on a cloud service! We stored all required code files in our public repository, as well as the project report documents, written in Markdown, so that we can write the reports simultaneously and independent from each others progress. To develop a data-driven product, we would surely make use of GitHub for code versioning and review.
 
-**_additional tools?_**: Python Notebooks? Weights & Biases? Docker?
-
 > - How would you assess and ensure the quality of your code?
 
 We were introduced to the Python Enhancement Proposals in this course. The [PEP 8](https://www.python.org/dev/peps/pep-0008/) is a style guide for Python code, through which we can ensure some consistency and therefore readability. Code is read much more often than written, so a consistent style is greatly needed when we go over the code to assess its quality. In another course in this semester, we were looking at Python docstrings and their high-level structure: what they should contain and how they should be written. If we were to develop a data-driven product, it would be smart to take proper use of docstrings, adhering to the [PEP 257](https://www.python.org/dev/peps/pep-0257/) on docstring conventions.
@@ -155,7 +153,6 @@ For our flask app, we had to create a Dockerfile to run the Python script on a D
 
 ```
 ENV FLASK_APP=/src/main.py
- 
 ```
 This is used to tell Flask, which file has to be used as entrypoint. 
 
@@ -189,7 +186,6 @@ Finally everything was ready to go for the HTTP POST request. For the request, w
 
 ```
 response = requests.post(endpoint, data = data)
- 
 ```
 The endpoint here was defined as 'http://localhost:80/predict'.
 We were then able to write the last command to printout the response we should get (hopefully a prediction). Therefore we used the following function:
