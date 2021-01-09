@@ -209,7 +209,7 @@ Last but not least, we put all of our dependencies into a "requirements.txt" fil
 - Check the three requirements before submitting the project: 
 - [x] Run ‘docker-compose up’ to start applications
 - [x] Create a virtual environment based on our requirements file
-- [ ] Run the Python script that sends the HTTP POST Request. A print of the prediction of our model is expected
+- [x] Run the Python script that sends the HTTP POST Request. A print of the prediction of our model is expected
 
 ## Misc:
 - [x] Cleaned up Git Repository / folder structure. Three folders :file_folder:: reports for the report documents, experiments for the Jupyter Notebook files that we used to train our models, and a src folder for all the code. We have a subfolder structure in the src folder, but we can change that for the final deliverable, if that is not recommended. 
