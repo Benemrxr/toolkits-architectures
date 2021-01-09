@@ -65,7 +65,7 @@ def index():
 @app.route('/predict', methods=['POST']) #'GET', 
 def predict():
     # specify the path where our model gets stored
-    #path = "/data/model.h5"
+    path = "/data/model.h5"
     
     logging.info("Called route /predict (POST)...")
 
