@@ -27,4 +27,4 @@ $ docker-compose up
 
 ## Feedback
 
-* Feel free to treach out to any of us [contributors](https://github.com/Benemrxr/toolkits-architectures/graphs/contributors)!
+* Feel free to reach out to any of us [contributors](https://github.com/Benemrxr/toolkits-architectures/graphs/contributors)!
