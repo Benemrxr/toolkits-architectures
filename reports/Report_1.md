@@ -1,7 +1,7 @@
 # Milestone 1: Group Marxer, Kotatis, Rohrer
 This report documents our progress for the first milestone.
 ## Task 1:
-The dataset assigned to us was constructed for a sentiment analysis publication from a collection of reviews from IMDB. The authors Maas et al. released this dataset to the public, it can be found online ([https://ai.stanford.edu/~amaas/data/sentiment/](https://ai.stanford.edu/~amaas/data/sentiment/)) and in their paper ([https://ai.stanford.edu/~amaas/papers/wvSent_acl2011.pdf](https://ai.stanford.edu/~amaas/papers/wvSent_acl2011.pdf)). Furthermore, the dataset can be imported using the Keras package in Python, which we will demonstrate later on.
+The dataset assigned to us was constructed for a sentiment analysis publication from a collection of reviews from IMDB. The authors' Maas et al. released this dataset to the public, it can be found online ([https://ai.stanford.edu/~amaas/data/sentiment/](https://ai.stanford.edu/~amaas/data/sentiment/)) and in their paper ([https://ai.stanford.edu/~amaas/papers/wvSent_acl2011.pdf](https://ai.stanford.edu/~amaas/papers/wvSent_acl2011.pdf)). Furthermore, the dataset can be imported using the Keras package in Python, which we will demonstrate later on.
 
 The dataset is about movie reviews and their binary sentiment polarity. It contains in total 50’000 reviews. Half of them are in the training set and the other half in the test set. The overall distribution of positive and negative labeled reviews is evenly distributed 25’000 positive and 25’000 negative. Furthermore, there are only 30 reviews allowed for each movie, because reviews for the same movie tend to have correlated ratings.
 
@@ -10,25 +10,25 @@ Reviews with neutral ratings are not included in the train- and test set. The se
 The problem solved by the machine learning models is a classical one and the aim is to distinguish whether a certain movie review has a positive or negative meaning.
 
 ## Task 2:
-For the second task we check out the code base assigned to us from GitHub.
+For the second task, we check out the code base assigned to us from GitHub.
 The code is listed in the keras repository of the Keras-Team on GitHub. The team consists of six users, while our file was put together by another eight contributors. Our code is called imdb_cnn.py, which indicates a Python syntax. It is saved in the examples folder of the repository.
 
-It includes helpful comments and begins by promting the import of a few objects, namely Keras layers and a dataset. The latter is identical to our dataset from task one, which has evidently been built-in into the Keras API. Documentation is provided by Keras ([https://keras.io/api/datasets/imdb/](https://keras.io/api/datasets/imdb/)). This integration proves helpful for our further tasks.
+It includes helpful comments and begins by prompting the import of a few objects, namely Keras layers and a dataset. The latter is identical to our dataset from task one, which has been built-in into the Keras API. Documentation is provided by Keras ([https://keras.io/api/datasets/imdb/](https://keras.io/api/datasets/imdb/)). This integration proves helpful for our further tasks.
 
-The code uses this dataset to demonstrate the use of Convolution1D for text classification. Documentation for the 1D convolution layer can found unter ([https://keras.io/api/layers/convolution_layers/convolution1d/](https://keras.io/api/layers/convolution_layers/convolution1d/)).
+The code uses this dataset to demonstrate the use of Convolution1D for text classification. Documentation for the 1D convolution layer can found under ([https://keras.io/api/layers/convolution_layers/convolution1d/](https://keras.io/api/layers/convolution_layers/convolution1d/)).
 
 ## Task 3:
 To commit the relevant Python file from the second task to our Git repository, we configure our terminals with our GitHub accounts and the repository that we set up for this course ([https://github.com/Stringz/data-science-toolkits-and-architectures](https://github.com/Stringz/data-science-toolkits-and-architectures)). 
 We clone the repository to our local machines with `$ git clone URL`. We then save a simple text file in the local directory that was created when we cloned the repository. Using `$ git add .` we can stage this file for commit to our local repository, and with `$ git commit -m "commit description"`we can commit the staged file. Lastly, we use `$ git push origin` to push the file to GitHub. Next, we can make changes to this file or add new files for further commits. Every commit should include a meaningful comment, that summarizes the changes and gives a quick insight about why that was necessary.
 ## Task 4:
-To run the python code on our Linux system, we first need to install pip via the terminal. Therefore we use the command `sudo su` first, to afterwards use the command `apt install python3-pip as root`. After that we installed the necessary packages for our code, namely Tensorflow and Keras, but the latter comes packaged with TensorFlow 2.0. Use the command `pip install tensorflow`.
-Later on we save the code as a python file, by copying it from the website and using a simple text editor. Lastly we change the working directory in the terminal to the directory where we saved the code file. We do this with the help of the command cd. Finally we are able to run the code with the command `python3 Filename.py`.
+To run the python code on our Linux system, we first need to install pip via the terminal. Therefore we use the command `sudo su` first, to afterward use the command `apt install python3-pip as root`. After that, we installed the necessary packages for our code, namely Tensorflow and Keras, but the latter comes packaged with TensorFlow 2.0. Use the command `pip install tensorflow`.
+Later on, we save the code as a python file, by copying it from the website and using a simple text editor. Lastly, we change the working directory in the terminal to the directory where we saved the code file. We do this with the help of the command cd. Finally, we can run the code with the command `python3 Filename.py`.
 
 With the help of the command `python3 - V`, we find out that we use Version 3.8.5 of Python. We use the command `pip3 list` to find out the versions of the packages. We use Version 2.3.1 of Tensorflow and Version 2.4.3 of Keras.
 
 We try to run this code on different systems. It works just as well with Python 3.8.3 on a macintosh terminal. To test it out of the box, we try to run it on the provided server. We try to use a requirements file to install Tensorflow on the linux server.
 ## Task 5:
-The input to the neural networks are different movie reviews and the rating which goes in hand with a certain review. The output contains different indicators. The first one is the variable loss = 0.2279. The loss is a prediction error of the neural network. The second output is the accuracy = 0.9088 which is the fraction of predictions that the model got right. The last two output values, val_accuracy and val_loss are similar to loss and accuracy, but only based during the validation test with the testing set. These two indicators are used to evaluate whether there is a potential problem of overfitting or not.
+The inputs to the neural networks are different movie reviews and the rating which goes in hand with a certain review. The output contains different indicators. The first one is the variable loss = 0.2279. The loss is a prediction error of the neural network. The second output is the accuracy = 0.9088 which is the fraction of predictions that the model got right. The last two output values, val_accuracy and val_loss are similar to loss and accuracy, but only based on the validation test with the testing set. These two indicators are used to evaluate whether there is a potential problem of overfitting or not.
 
 Keras is a deep learning library written in python. Keras provides several API's for different backends including Tensorflow. Even though Keras is part of the Tensorflow Core API, it is still an independent library.
 
@@ -36,9 +36,9 @@ The data is loaded with the help of the keras.datasets package. This package con
 
 We install the package pipdeptree to find out which dependencies come in hand with the imported modules. We then run piptree and search all the dependencies of our imported modules Tensorflow and Keras, which are listed below in the Appendix.
 
-To finish of this task with the last question, the architecture of the neural network is a feed-forward neural network. The first layer is the input and the last one the Output.
+To finish this task with the last question, the architecture of the neural network is a feed-forward neural network. The first layer is the input and the last one the Output.
 ## Task 6:
-For task 6 we need to create a documentation file for our code, and add it to the root folder of our GitHub project. This file should explain step by step how one can run the code, out of the box.
+For task 6 we need to create a documentation file for our code and add it to the root folder of our GitHub project. This file should explain step by step how one can run the code, out of the box.
 
 ## Additional implementation:
 Plot results using matplotlib. Install matplotlib with `pip install matplotlib`.
