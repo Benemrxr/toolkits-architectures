@@ -18,7 +18,7 @@ $ git clone https://github.com/Benemrxr/toolkits-architectures.git
 ```
 After cloning the repo, move to the docker folder:
 ```
-$ cd toolkits-archtitecture/src/docker
+$ cd toolkits-archtitectures/src/docker
 ```
 Now, start our application:
 ```
