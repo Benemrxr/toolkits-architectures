@@ -4,7 +4,7 @@
 
 ## The Repository 
 
-This repository is for our class in data science toolkits and architecture. Find our progress documentation in the five milestone [reports](https://github.com/Benemrxr/toolkits-architectures/tree/master/reports) and check out our [experiments](https://github.com/Benemrxr/toolkits-architectures/tree/master/experiments). And of most interest, our [code](https://github.com/Benemrxr/toolkits-architectures/tree/master/src) with the [docker](https://github.com/Benemrxr/toolkits-architectures/tree/master/src/docker) and [request](https://github.com/Benemrxr/toolkits-architectures/tree/master/src/request) subfolders.
+This repository is for our class in data science toolkits and architectures. Find our progress documentation in the five milestone [reports](https://github.com/Benemrxr/toolkits-architectures/tree/master/reports) and check out our [experiments](https://github.com/Benemrxr/toolkits-architectures/tree/master/experiments). And of most interest, our [code](https://github.com/Benemrxr/toolkits-architectures/tree/master/src) with the [docker](https://github.com/Benemrxr/toolkits-architectures/tree/master/src/docker) and [request](https://github.com/Benemrxr/toolkits-architectures/tree/master/src/request) subfolders.
 
 ## About this project:
 
@@ -16,7 +16,7 @@ Clone our repo:
 ```
 $ git clone https://github.com/Benemrxr/toolkits-architectures.git
 ```
-After cloning the repo, move to the docker folder
+After cloning the repo, move to the docker folder:
 ```
 $ cd toolkits-archtitecture/src/docker
 ```
