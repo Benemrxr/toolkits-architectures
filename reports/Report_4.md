@@ -49,7 +49,7 @@ pgadmin:
 ## Task 0: 
 > Finish remaining Tasks from Milestone 3 in case your deliverable does not work.
 
-In order to make it possible for us to correct most of the weaknesses of our older milestones, we decided to ask a friend of us which is more into coding. Although, he is not an educated computer scientist, he only posesses a little bit more experience than we do. Toghether with him, we improved different things to make our code running and also to kind of clean our code and implement "better practice". 
+In order to make it possible for us to correct most of the weaknesses of our older milestones, we decided to ask a friend of us which is more into coding. Although, he is not an educated computer scientist, but posesses a little bit more experience than we do. Toghether with him, we improved different things to make our code running and also to kind of clean our code and implement "better practice". 
 
 1. Created classes and modularized our code further
 
@@ -61,11 +61,11 @@ We then created a seperate python script with a class `Database`. In there, we b
 
 3. Created module `dbactions.py`
 
-Inside of this module, we defined different functions in order to make extractions and insertion of our input- and prediction data into our database easier. We further added functions to create the database and tables. One special function, that we would like to point out here is the `check_database_exists` function. This function makes it possible for us to check, whether the database was alreadyd. Therefore we can avoid problems with duplicates. We later implement this function into our main script in order to check, whether the database already exists.
+Inside of this module, we defined different functions in order to make extractions and insertion of our input- and prediction data into our database easier. We further added functions to create the database and tables. One special function, that we would like to point out here is the `check_database_exists` function. This function makes it possible for us to check, whether the database was already created. This helps us to avoid problems with duplicates. We later implement this function into our main script in order to check, whether the database already exists.
 
 4. Serializer and Deserializer
 
-Since we were not able to insert our 2D Numpy-arrays into the database, we had to come up with an idea. With the help of our friend, we were able to create the module `serialize.py`. Inside of this module, there are two functions defined. The first one takes the array and converts it into binary strings ("BYTEA" Data Type in PostgreSQL). This datatype can then be added to our database. 
+Since we were not able to insert our 2D Numpy-arrays directly into the database, we had to come up with an idea. With the help of our friend, we were able to create the module `serialize.py`. Inside of this module, there are two functions defined. The first one takes the array and converts it into binary strings ("BYTEA" Data Type in PostgreSQL). This datatype can then be added to our database. 
 On the other hand, we also want to extract data from our database in order to make predictions. We therefore did kind of the same thing backwards and defined it as the deserializer-function. 
 
 5. Merge our modules into our `main.pyTF_CPP_MIN_LOG_LEVEL=2
@@ -76,7 +76,7 @@ After we defined all of our functions, we were able to arrange our `main.py` scr
 
 The biggest challange so far would be, to make it all work with docker-compose. We therefore split our project into two "sub-processes". The first one in the folder called "pyml" is responsible for building up our model and save it as a .h5 file. With the help of this "sub-process" we do not have to upload our model manually on git-hub, we can run this process in our docker-compose. To do so, we created a Dockerfile for this process similar to the one, which already worked before.  
 
-The second sub-process is the required steps in task 2 from the precvious milestone. We therefore created the folder "pypredict". In there, we added all the necessary python scripts we created before. We also created a Dockerfile in order to run these files in a seperate container. To make the whole thing more understandable, we created a source folder in each of our sub-process-folders, where we added all the scripts, modules and also our requirement files (also aiming for "best practice"). 
+The second sub-process contains the required steps in task 2 from the precvious milestone. We therefore created the folder "pypredict". In there, we added all the necessary python scripts we created before. We also created a Dockerfile in order to run these files in a seperate container. To make the whole thing more understandable, we created a source folder in each of our sub-process-folders, where we added all the scripts, modules and also our requirement files (also aiming for "best practice"). 
 
 Finally we were able to improve our `docker-compose.yml`. In there we did not have to do so many changes, since our previous was already quite good. We just made it working with our organization of the scripts and modules. We further added networks. We did this also aiming for "Best-practice". Since our friend suggestet this to us for security reasons. We further added the environment-command:
 
@@ -108,19 +108,19 @@ Metrics are performance indicators and allow us to compare experiment outcomes. 
 
 One metric I want to quickly explain is **accuracy**, where the evaluation focus lies on the overall effectiveness (success rate) of a classifier. It tells us how often, overall, the classifier is correct. To calculate this metric, we take the sum of all correct predictions and divide it by the total number of predictions. It is the reverse of the **error rate**, which tells us how often, overall, the classifier is wrong. The calculation of these metrics is very apparent with the help of the confusion matrix, which we will also check out in the following questions. 
 
-To conclude this task, we always have to be **careful** with the interpretation and selection of such metrics. A *good* accuracy is a high one (near 1), but whether the predictive model is useful or not depends on the context of the task. Say we want to classify spam emails, and our filtering model classifies all 1'000 mails as spam, the accuracy would be very high if only 10 emails were non-spam. But obviously, this wouldn't be a useful model! :e-mail:
+To conclude this task, we always have to be **careful** with the interpretation and selection of such metrics. A *good* accuracy is a high one (near 1), but whether the predictive model is useful or not depends on the context of the task. Say we want to classify spam emails, and our filtering model classifies all 1'000 mails as spam, the accuracy would be very high if only 10 emails were non-spam. But obviously, this would not be a useful model! :e-mail:
 
 This example holds especially in unbalanced datasets, where the number of cases in one class is significantly higher than in the other, as the confusion matrix only tells us how the classifier is behaving for individual classes.
 
 > - What is Precision and Recall? Why is there often a Trade-off between them?
 **Precision** is the chance of having the positive condition among those that test positive. It is also called the **Positive Predictive Value (PPV)** and is calculated as the number of true positives over the sum of all positives. *When the model predicts positive, how often is it correct?*
 
-**Recall** evaluates the effectiveness of a classifier to identify positive labels. Also denoted as **Sensitivity** or the **True Positive Rate (TPR)**, it is calculated as TP over TP+FN, the number of true positives over the total of all actual positives. It is also a measure of positive identification. *When it's actually positive, how often does it predict positive?*
+**Recall** evaluates the effectiveness of a classifier to identify positive labels. Also denoted as **Sensitivity** or the **True Positive Rate (TPR)**, it is calculated as TP over TP+FN, the number of true positives over the total of all actual positives. It is also a measure of positive identification. *When it is actually positive, how often does it predict positive?*
 
 In an ideal scenario there is a perfectly seperatable data, both recall and precision can get the maximum values of 1.0. But usually, this is not the case as there is some noise and uncertainty in the data. There might be some points of positive class closer to the negative class and vice versa. In such cases, shifting the decision boundary can either increase the recall or precision but not both. Increasing one parameter decreases the other, we will always miss classify some points, that is classify a point from a negative class as positive and topsy-turvy. That is the **trade off** between the fractions of correct positives among the total predicted positives (precision) and among the total positives (recall). 
 
 > - What is AUROC Metric?
-The performance of a classification model can also be evaluated graphically. One common visual model evaluation is the **ROC curve**. ROC stands for **R**eceiver **O**perating **C**haracteristic. ROC curves are used to see how well the classifier can separate positive and negative examples and to identify the best threshold for seperating them. They visualize the tradeoff between sensitivity (Recall, as described above, the True Positive Rate) and the False Positive Rate (1-Sensitivity) in a binary classifier. Usually, FPR is on the x-axis and TPR on the y-axis, and the *45 degree line* gives us a *random guessing performance*. We want to keep FDR as low a possible and TRP as high as possible, that is we want to maximize the **A**rea **U**nder the **ROC** curve, the **AUROC** metric. 
+The performance of a classification model can also be evaluated graphically. One common visual model evaluation is the **ROC curve**. ROC stands for **R**eceiver **O**perating **C**haracteristic. ROC curves are used to see how well the classifier can separate positive and negative examples and to identify the best threshold for seperating them. They visualize the tradeoff between sensitivity (Recall, as described above, the True Positive Rate) and the False Positive Rate (1-Sensitivity) in a binary classifier. Usually, FPR is on the x-axis and TPR on the y-axis, and the *45 degree line* gives us a *random guessing performance*. We want to keep FDR as low as possible and TRP as high as possible and therefore maximize the **A**rea **U**nder the **ROC** curve, the **AUROC** metric. 
 
 Back to the ROC: We run the classification algorithm on the data and assign the probability of belonging to class 1 to each actual value. We then order the scores in decreasing order and assign cutoffs based on a selected interval, typically 10% intervals. We count the true positives and true negatives for each cutoff and calculate the true positive and true negative rate for each decile. We use these TP and TN rates to draw the ROC curve. It can be used to compare multiple classifiers, as the performance is better the tighter the curve hugs the axes. 
 
@@ -128,7 +128,7 @@ As this might be difficult to guess from simple graphical comparison, we can cal
 
 We can select the optimal cutoff value by drawing the **accuracy line** into the graph, through the outermost point (i.e. the point closest to TPR=1 and FDR=0) with the slope alpha of the accuracy line as the **ratio of neg/pos values**. To get the corresponding **accuracy**, we find the *intersection point* of the accuracy line and the *descending diagonal*. The accuracy, as calculated by (TP+TN)/N is the y-axis value of the point of intersection we just drawed in. 
 
-From the AUC, we can derive the **Gini coefficient**, which normalizes the AUC so that a random classifier scores 0 and a perfect classifier scores 1. Gini above 60% indicates a good model, and is derived as *Gini = 2 * AUC - 1*, where accuracy = AUC. AUC provides a single measurement to compare across different models, where several cutoff values can be compared. But, as there are not only advantages, ROC curves show only the performance of binary classifiers and the AUC usefulness is questioned. [Lobo et al.](https://onlinelibrary.wiley.com/doi/full/10.1111/j.1466-8238.2007.00358.x?casa_token=XbzRmWnAcm4AAAAA%3AD0FVgy_fRUYP8ZoKG-jAkLrFTw1HiRgpPLcD1DPAYXEiwgq7nxgVmPwnk7kOuN9qk4F8LloBsooMH6Kx4A) have a very popular and interesting paper, where they come to the conclusion to not recommend using AUC for five reasons, such as that is summarises the test performance over regions of the ROC space in which one would rarely operate).
+From the AUC, we can derive the **Gini coefficient**, which normalizes the AUC so that a random classifier scores 0 and a perfect classifier scores 1. Gini above 60% indicates a good model, and is derived as *Gini = 2 * AUC - 1*, where accuracy = AUC. AUC provides a single measurement to compare across different models, where several cutoff values can be compared. But, as there are not only advantages, ROC curves show only the performance of binary classifiers and the AUC usefulness is questioned. [Lobo et al.](https://onlinelibrary.wiley.com/doi/full/10.1111/j.1466-8238.2007.00358.x?casa_token=XbzRmWnAcm4AAAAA%3AD0FVgy_fRUYP8ZoKG-jAkLrFTw1HiRgpPLcD1DPAYXEiwgq7nxgVmPwnk7kOuN9qk4F8LloBsooMH6Kx4A) have a very popular and interesting paper, where they come to the conclusion to not recommend using AUC for five reasons, such as that it summarises the test performance over regions of the ROC space in which one would rarely operate).
 
 > - What is a Confusion Matrix?
 Back to the **confusion matrix**. Its name might be explained as to whether our model correctly identified the item or was *confused* with another label. It can be used for multi-class classifiers, but to explain it we can start with a two-class classifier (binary classifier), where our data contains information about actual and predicted values. 
@@ -137,14 +137,14 @@ Our matrix has four fields, as it is a special kind of **contingency table** wit
 
 FP is also known as *Type I error*, cases predicted to be positive that are actually negative. FN cases are *Type II errors*, they are predicted to be negative but are actually positive. 
 
-We can calculate the sum of the actual and predicted values, which is useful fror several model evaluation metrics. Various measures can be derived from the confusion matrix. **Overall measures of performance**, such as the accuracy (TP+TN)/(TP+TN+FN+FP) and the error rate (FP+FN)/(TP+TN+FN+FP). Then, **measures of positive identifications** such as recall/sensitivity (TPR) and fall-out (FPP), an **measures of negative identification** such as specificity (TNR) and the false negative rate (type II error). 
+We can calculate the sum of the actual and predicted values, which is useful for several model evaluation metrics. Various measures can be derived from the confusion matrix. **Overall measures of performance**, such as the accuracy (TP+TN)/(TP+TN+FN+FP) and the error rate (FP+FN)/(TP+TN+FN+FP). Then, **measures of positive identifications** such as recall/sensitivity (TPR) and fall-out (FPP), a **measure of negative identification** such as specificity (TNR) and the false negative rate (type II error). 
 
-The [Wikipedia entry](https://en.wikipedia.org/wiki/Confusion_matrix) of the confusion matrix has a nice summary in table form, that gives us a good overview of the most model evaluation metrics, their calculations and their relations. 
+The [Wikipedia entry](https://en.wikipedia.org/wiki/Confusion_matrix) of the confusion matrix has a well structured summary in table form, that gives us a good overview of the most model evaluation metrics, their calculations and their relations. 
 
 ## Task 2:
 > Instrument your code with Weights and Biases (within a Docker container). Choose an appropriate metric for optimizing your ML Model. Reasoning behind it? 
 
-We decided to use the metric **accuracy**. As explained in the answers above, it is calculated as the sum of all correct predictions divided by the total number of predictions. We can be confident is the result of this metric, as our dataset is perfectly balanced, and we can avoid the problem in the spam-filter example from above!
+We decided to use the metric **accuracy**. As explained in the answer above, it is calculated as the sum of all correct predictions divided by the total number of predictions. We can be confident with the result of this metric, as our dataset is perfectly balanced, and we can avoid the problem in the spam-filter example from above!
 
 > - Login to W&B
 
@@ -155,7 +155,7 @@ WANDB_TOKEN=1515fcea400dc5ecfca6b99cf381c4fd94d7f726
 
 ```
 
-We immediately added the .env file to our .gitignore and we further added some suggestions from the internet to our .gitignore in order to avoid future difficulties. We then created the docker_entrypoint.sh file equal to the example on the project sheet. After that, we created a Dockerfile as follows:
+We immediately added the .env file to our .gitignore and we further added some suggestions from the internet to our .gitignore in order to avoid future difficulties. We then created the docker_entrypoint.sh file equally to the example on the project sheet. After that, we created a Dockerfile as follows:
 
 ```
 FROM python:3.8-slim-buster
@@ -190,7 +190,7 @@ USER appuser
 CMD ["python", "test.py"]
 ```
 
-We designed this Dockerfile similar to the one we built to run our project in the milestones before. In order to run log in to W&B, we first added the docker_ entrypoint.sh file to our container. We then tried to run the File with the ENTRYPOINT function, which failed. With the help of google, we found out that the command `RUN ["chmod", "+x", "docker_entrypoint.sh"]` works to run shell scripts. This is the reason for the existence of the command in our Dockerfile. We spend a lot of time install the module `wandb` properly. We first got an error because of the dependency "psutsil" , which was unable to build up its wheel. We solved this problem with the help of the function `RUN apt-get update -y && apt-get install -y gcc`. Once this problem was solved, the next one appeared. We tried to import the wandb-module in our python script and failed badly again. We got a permission error for the folder "/home/appuser". We further solved this problem with the help of the following function: `RUN chown -R appuser /home`. Once this error was solved too, we were finally ready to add the next steps to our python script. 
+We designed this Dockerfile similar to the one we built to run our project in the milestones before. In order to log in to W&B, we first added the docker_ entrypoint.sh file to our container. We then tried to run the File with the ENTRYPOINT function, which failed. With the help of google, we found out that the command `RUN ["chmod", "+x", "docker_entrypoint.sh"]` works to run shell scripts. This is the reason for the existence of the command in our Dockerfile. We spend a lot of time install the module `wandb` properly. We first got an error because of the dependency "psutsil" , which was unable to build up its wheel. We solved this problem with the help of the function `RUN apt-get update -y && apt-get install -y gcc`. Once this problem was solved, the next one appeared. We tried to import the wandb-module in our python script and failed badly again. We got a permission error for the folder "/home/appuser". We further solved this problem with the help of the following function: `RUN chown -R appuser /home`. Once this error was solved too, we were finally ready to add the next steps to our python script. 
 
 > - Train a Model 
 
@@ -198,11 +198,11 @@ In order to train the model, we added our python scripts to the "/src" folder. T
 
 > - Save and upload the trained model
 
-Things started to get difficult once again. We tried out to save our model with function:
+Things started to get difficult once again. We tried out to save our model with the function:
 ```
 model.save(os.path.join(wandb.run.dir, "model.h5"))
 ```
-This, what a surprise, did not work. We got an error which said, that we are not logged in to W&B, which meant, that we can start all over again, because something went wrong with the login. We tried to make our shell script run with the "ENTRYPOINT" command in our Dockerfile which now looks as follows:
+This (what a surprise) did not work. We got an error, that we are not logged in to W&B, which meant, that we can start all over again. Something went wrong with the login. We tried to make our shell script run with the "ENTRYPOINT" command in our Dockerfile which now looks as follows:
 
 ```
 FROM python:3.8-slim-buster
@@ -259,7 +259,7 @@ Since we had to wait for help on Slack, we logged in manually and proceeded with
 
 > - Log the value of the loss function (graphically)
 
-It was quite challenging for us to find out the names of the loss function. Since we do not have many experience with ML itself and neither with Keras, most of these functions during the model building process were completely new for us. With help of the internet, we first tried out to implement the `wandb.log()` function and desperately searched a solution to find out how we could get the names of the metrics. Suddenly we found another approach. Namely we learned about the `WandbCallback` from the `wandb` module. We learned that this function makes it possible to track the important metrics during the process. We then added 
+It was quite challenging for us to find out the names of the loss function. Since we do not have many experience with ML itself and neither with Keras, most of these functions during the model building process were completely new for us. With help of the internet, we first tried out to implement the `wandb.log()` function and desperately searched a solution to find out how we could get the names of the metrics. Suddenly we found another approach. We learned about the `WandbCallback` from the `wandb` module. We learned that this function makes it possible to track the important metrics during the process. We then added 
 ```
 callbacks=[WandbCallback()]
 ```
@@ -308,7 +308,7 @@ Differences between the epochs of model_run_2:
 - accuracy = +0.1
 - val_accuracy = +0,02
 
- In this run we can see the loss and val_loss decreases, and the other way round for the accuracy, in which both metrics are increasing. This indicates a good training of the neural network, since we try to minimise the loss function and as long as the val_loss is not increasing (or stale) we won't overfit the neural network to the training data. Also accuracy and val_accuracy are both increasing, which is good. We can also interpret val_accuracy as a measurement on overfitting, since if the accuracy on the training data increases and the validation accuracy decreases (unseen data), then the model is overtrained on the training data. But as we saw before we only got minimal changes in the last epoch vs our benchmark run, so it is not of big importance.
+ In this run we can see the loss and val_loss decreases, and the other way round for the accuracy, where both metrics are increasing. This indicates a good training of the neural network, since we try to minimize the loss function and as long as the val_loss is not increasing (or stale) we won't overfit the neural network to the training data. Also accuracy and val_accuracy are both increasing, which is good. We can also interpret val_accuracy as a measurement on overfitting, since if the accuracy on the training data increases and the validation accuracy decreases (unseen data), then the model is overtrained on the training data. But as we saw before we only got minimal changes in the last epoch vs our benchmark run, so it is not of big importance.
  
  3. Increase Batch size
  
@@ -340,8 +340,8 @@ Difference to our benchmark model_run in the last epoch:
  - accuracy = -0,3
  - val_accuracy = -0,38
 
-In this run, we can observe the highest variation between this run and the default run. We can further observe, that in this run the curves are flat or lets say the differences between the epochs are so minimal that they are not really mentionable. In this case we really can see that the performance of this neural network is much worser than our default benchmark run. This neural network also doesn't really learn/train, since the metrics of its run stay the same. Also the accuracy of this neural network is around 50%, meaning we could simply replace this by just guessing.
+In this run, we can observe the highest variation between this run and the default run. We can further observe, that in this run the curves are flat or lets say the differences between the epochs are so minimal that they are not really mentionable. In this case we really can see that the performance of this neural network is much worse than our default benchmark run. This neural network also does not really learn/train, since the metrics of its run stay the same. Also the accuracy of this neural network is around 50%, meaning we could simply replace this by just guessing.
 
 ## Task 3:
 
-First we created a .ipynb file for the Jupyter notebook. Soon we realised that it was pretty tedious writing a Jupyter notebook via text editor. Thats why we used Anaconda to open and write in Jupyter, as it is more easy to use. There is not much to say for this task, we had a look in our dataset and found the most common and least common words used in the reviews and made some graphs. Most common words are, e.g "the", "and", "of", etc. which isn't quite surprising. Another common word was "br", which we think is most probably because the review had HTML br tags and the Keras Dataset version left them in. There are also many words that appear only once, like "voorhees", "artbox", "copywrite", we are not so sure what they mean except the latter which is simply misspelled, so we are kinda happy to see that they only appeared once :)
+First we created a .ipynb file for the Jupyter notebook. Soon we realised that it was pretty tedious writing a Jupyter notebook via text editor. Thats why we used Anaconda to open and write in Jupyter, as it is more easy to use. There is not much to say for this task, we had a look at our dataset, found the most common and least common words used in the reviews and made some graphs. Most common words are, e.g "the", "and", "of", etc. which is not quite surprising. Another common word was "br", which we think is most probably because the review had HTML br tags and the Keras Dataset version left them in. There are also many words that appear only once, like "voorhees", "artbox", "copywrite", we are not sure what they mean except the latter, which is simply misspelled, so we are kinda happy to see that they only appeared once :)
