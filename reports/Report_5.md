@@ -44,15 +44,15 @@ predictions to analyze the model’s performance in a real-world scenario?
 
 In real-world scenarios we often encounter with confidential data, in which we first would need to build the model using already existing test data and then train on premise our model with the real data set. In our case gladly reviews are not confidential (as far as we know). 
 
-To provide data to the model, we could either scrape more reviews from the internet and read them in the model, or we could also let other people give input to the model (e.g they write directly on our web application a review). Either way after we got the data, we would first have to pre-process the new data acquired (since our model vectorizes the words, we would need to apply the same method on the new data). We could then save our predictions and then we could analyze the performance (in the 2nd option in which people could give input directly, we could have a text field in which they could write a review and another field in which they could choose whether their intention was to write a positive or negative review and we could use these as our performance measurement).
+To provide data to the model, we could either scrape more reviews from the internet and read them in the model, or we could also let other people give input to the model (e.g they write a review directly to our web app). Either way after we got the data, we would first have to pre-process the new data acquired (since our model vectorizes the words, we would need to apply the same method on the new data). We could then save our predictions and analyze the performance (in the 2nd option in which people could give input directly, we could have a text field in which they could write a review and another field in which they could choose whether their intention was to write a positive or negative review and we could use these as our performance measurement).
 
 > - How can you improve on the model iteratively and deploy it to customers in
 a web application. How could you structure your product as a microservice
 architecture
 
-Our model uses 2 epochs, meaning there are 2 iterations to build the model (more epochs don’t really improve metrics and could even lead to overfitting and it'll worsen). If with iteration is meant the process of iterating whole models (and not just iterating in the model), then we need to know how we can get feedback from a model in production. We have to monitor our model in order to recognise performance depreciation, data skew, etc. and managing model versioning as well as rolling out new models. The new models should be obviously properly tested before replacing it with the old one. In this way we can always have a running model for our customers, without them even noticing of a potential problem. (In our case we probably aren't that much affected, e.g the word "good" gets a totally different meaning and therefore our model would predict falsely; of course semantics is a challenge, like detecting irony).
+Our model uses 2 epochs, meaning there are 2 iterations to build the model (more epochs don’t really improve metrics and could even lead to overfitt will worsen). If with iteration is meant the process of iterating whole models (and not just iterating in the model), then we need to know how we can get feedback from a model in production. We have to monitor our model in order to recognise performance depreciation, data skew, etc. and managing model versioning as well as rolling out new models. The new models should be obviously properly tested before replacing it with the old one. In this way we can always have a running model for our customers, without them even noticing of a potential problem. (In our case we probably aren't that much affected, e.g the word "good" gets a totally different meaning and therefore our model would predict falsely; of course semantics is a challenge, like detecting irony).
 
-We can use flask as a tool to deploy it as a web application for our customers. We would have backend and front end as our architecture (backend: our model, flask, docker, DB; frontend: web app and its UI, docker, nginx). A great benefit of using microservices is, that they loosely connect via APIs to form a microservices-based application architecture. This architecture offers greater agility and pluggability because we can develop, deploy, and scale each microservice independently. 
+We can use flask as a tool to deploy it as a web application for our customers. We would have backend and front end as our architecture (backend: our model, flask, docker, DB; frontend: web app and its UI, docker, nginx). A great benefit of using microservices is, that they loosely connect via APIs to form a microservices-based application architecture. This architecture offers greater agility and pluggability because we can develop, deploy, and scale each microservice independently.
 
 > - Describe the process step by step with the example of an E-mail spam
 detector. Assume you want to provide a service where customers can send
@@ -68,7 +68,7 @@ If we want to provide a web site that checks whether an uploaded E-mail might be
 1) We begin by building a binary classifier model, to check whether the uploaded email might be spam or not. We use Python and ideally have some (lots of) email data ready. We then classify the emails manually as spam or no spam, so that we have labeled data to train our model. Our model might be based on a k-nearest neighbor algorithm, where an object is classified by a plurality vote of its neighbors. Knn is thus a supervised learning algorithm. We take advantage of the research in the field of classification algorithms, specifically this paper from [Dada et. al, on Machine learning for email spam filtering: review, approaches and open research problems](https://doi.org/10.1016/j.heliyon.2019.e01802).
 
 2) Next, we assess the quality of our model and try different modifications. We measure the metrics of our choice on the Weights and Biases site and track the experiments in a Jupyter Notebook, which we share for our team on GitHub. We would use GitHub just like in the projects of this course, but maybe we won't share all the details of the code with the public - otherwise spammers could take advantage of it!
-Back to the metrics. A very popular metric for performance evaluation of classification is classification accuracy, measuring the percentage of rightly classified messages. It has however been highlighted that using Accuracy as the only performance indices is not sufficient. A typical user might have only few spam mails, compared to the amount of normal mail he receives. So classifying all mails as non-spam would leave us with a high accuracy, but no actual use as a filter. We need to take other measures into account, such as recall and precision. Recall would measure the ratio of correct spam to the sum of true spam, whereas spam precision would measure the ratio of correct spam to all classified spam. Recall can be deemed as the comparative number of spam messages that the filter succeeded in preventing from entering email inbox. This shows how the model handles spam messages. Precision shows the reliability of the filter, takes into account how many non-spam were falsely classified. This error is very important to avoid, as the cost of false positives is much more than that of false negatives. Cost sensitivity should be considered, and it is worth checking out the weighted metrics suggested in the article from above.
+Back to the metrics. A very popular metric for performance evaluation of classification is classification accuracy, measuring the percentage of correctly classified messages. It has however been highlighted that using Accuracy as the only performance indices is not sufficient. A typical user might have only few spam mails, compared to the amount of normal mail he receives. So classifying all mails as non-spam would leave us with a high accuracy, but no actual use as a filter. We need to take other measures into account, such as recall and precision. Recall would measure the ratio of correct spam to the sum of true spam, whereas spam precision would measure the ratio of correct spam to all classified spam. Recall can be deemed as the comparative number of spam messages that the filter succeeded in preventing from entering email inbox. This shows how the model handles spam messages. Precision shows the reliability of the filter, takes into account how many non-spam were falsely classified. This error is very important to avoid, as the cost of false positives is much more than that of false negatives. Cost sensitivity should be considered, and it is worth checking out the weighted metrics suggested in the article from above.
 
 3) Now, our model should be ready for implementation. We need to make sure that our scripts run on the server, so we dockerize them. Next, we deploy the Flask web application. Moving along, we can add Gunicorn, a production-grade WSGI server that functions as a gateway to the web server and Flask. Then we add Nginx to act as a reverse proxy for Gunicorn to handle client requests as well as serve up static files.
 
@@ -102,7 +102,7 @@ The second function is not expected in the task, but we wanted to try our best t
 
 > - How to encode our data?
 
-In order to send a test sample to our application, we decided to encode our data with JSON. We choose JSON, because this was the only encoding that we have already heard of. To encode and decode our data, we import the python module 'json'. We decode the data we get from the POST request and convert it to a numpy array with the command:
+In order to send a test sample to our application, we decided to encode our data with JSON. We choose JSON, because this was the only encoding method that we have already heard of. To encode and decode our data, we import the python module 'json'. We decode the data we get from the POST request and convert it to a numpy array with the command:
 
 ```
 np.array(json.loads(request.data))
@@ -124,7 +124,7 @@ In order to feed our model with the provided data, we first had to transform it 
  mlmodel.model.predict(data)
 ```
 
-We then assigned the predictions, which are also a numpy array to the variable "predictions" in order to use them in the following steps.
+We then assigned the predictions, which are also stored as a numpy array to the variable "predictions" in order to use them in the following steps.
 
 > - Save the prediction to a PostgreSQL DB (only the prediction. This means
 you only need one table, that has an ID and the predicted label/value)
@@ -135,11 +135,11 @@ We first created the database inside of our 'init(). Therefore we use the functi
 
 To create the new table as expected in the task, we transformed our function from the last milestone so that it creates the table as described in the task. We further renamed this updated function as 'create_predefined_table()' to avoid misunderstandings. Finally, we called this function inside of our predict route. 
 
-To insert our predictions into our created table, we again had to serialize our data, as always when working with the database. Therefore, we also had a function created in a previous milestone, which we could simply import and use. This 'serializer()' function makes it possible to save the data in our database, since PostgreSQL is not able to store numpy arrays. We then used the serialized array as a parameter for our 'insert_predictions()' function and store the predictions this way into our database.
+To insert our predictions into our created table, we again had to serialize our data, as always when working with the database. Therefore, we also had a function created in a previous milestone, which we could simply import and use. This 'serializer()' function makes it possible to save the data in our database, since PostgreSQL is not able to store numpy arrays. We then used the serialized array as a parameter for our 'insert_predictions()' function and store the predictions into our database.
 
 > - Return the prediction to the sender of the HTTP POST request
 
-To send the data back, we have to encode it as JSON again. We use the function 'json.dumps()'. But here we got into troubles, since it is not possible to send numpy arrays in the JSON format. With the help of the internet, we found a solution for this problem. We used the function 'tolist()'to transform our numpy array to a python list. We then used this list as a parameter for the 'json.dumps()' function. This way we are able to send our predictions back to the user. 
+To send the data back, we had to encode it as JSON again. We use therefore the function 'json.dumps()'. But here we got into troubles, since it is not possible to send numpy arrays in the JSON format. With the help of the internet, we found a solution for this problem. We used the function 'tolist()'to transform our numpy array to a python list. We used this list as a parameter for the 'json.dumps()' function. This way we were able to send our predictions back to the user. 
 
 > - There should be two Docker container communicating with each other (your
 Flask app, and the PostgreSQL DB). Use docker-compose to start both
@@ -156,7 +156,7 @@ ENV FLASK_APP=/src/main.py
 ```
 This is used to tell Flask, which file has to be used as entrypoint. 
 
-We save this Dockerfile in the same direction as our web application. This way, we could later on run the container from our "docker-compose.yml" file. 
+We saved this Dockerfile in the same direction as our web application. This way, we could later on run the container from our "docker-compose.yml" file. 
 
 We then created our "docker-compose.yml" file. As well as for the previous Dockerfile, we used the file from the last milestone as a template. We first added a new service (pyapi) to build up and run our Dockerfile which we created for the web-application. We added the depends_on attribute to be sure, that this container waits until the database is build up. We did this to avoid errors, that occur because the database is not ready. 
 
@@ -172,7 +172,7 @@ After a few minutes of googleing and tryout, we found the solution for our probl
  
 > Write a script that uses the "request" library to extract a sample and sends a HTTP POST Request.
 
-To get a prediction for a sample, we first need a sample of the data which can then be used for our prediction. Therefore we created the function 'load_imdb_sample()' We wanted to be able to tryout different samples. Therefore we build up the function in a way that makes it possible for us to pick a specific sample by the index (Parameter "start").
+To get a prediction for a sample, we first need a sample of the data which can then be used for our prediction. Therefore we created the function 'load_imdb_sample()' We wanted to be able to tryout different samples. We build up the function in a way that makes it possible for us to pick a specific sample by the index (Parameter "start").
 We then called this function we defined in the same script with the value 373. This gives us the 373th datapoint of the whole imdb datapackage. This is our sample, that we can send to predict. However we can always change this number to get different predictions.
 
 In order to send this sample to our web application, we again had to encode it in the same way as we did it before. We again used the function: 
@@ -213,4 +213,4 @@ Last but not least, we put all of our dependencies into a "requirements.txt" fil
 
 ## Misc:
 - [x] Cleaned up Git Repository / folder structure. Three folders :file_folder:: reports for the report documents, experiments for the Jupyter Notebook files that we used to train our models, and a src folder for all the code. We have a subfolder structure in the src folder, but we can change that for the final deliverable, if that is not recommended. 
-- [ ] Improve GitHub community profile, add README etc. as recommended by GitHub. -> will be done for the final submission :clipboard:
+- [x] Improve GitHub community profile, add README etc. as recommended by GitHub. -> will be done for the final submission :clipboard:
