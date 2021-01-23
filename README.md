@@ -6,9 +6,9 @@
 
 This repository is for our class in data science toolkits and architectures. Find our progress documentation in the five milestone [reports](https://github.com/Benemrxr/toolkits-architectures/tree/master/reports) and check out our [experiments](https://github.com/Benemrxr/toolkits-architectures/tree/master/experiments). And of most interest, our [code](https://github.com/Benemrxr/toolkits-architectures/tree/master/src) with the [docker](https://github.com/Benemrxr/toolkits-architectures/tree/master/src/docker) and [request](https://github.com/Benemrxr/toolkits-architectures/tree/master/src/request) subfolders.
 
-## About this project:
+## About this project
 
-... binary classifier, IMBD dataset from Keras, etc.
+Our model uses a binary classifier to rate IMDB movie review sentiments. The labeled dataset was first was constructed for a sentiment analysis publication at Stanford. The authors Maas et al. released this dataset to the public - it can be found [online](https://ai.stanford.edu/~amaas/data/sentiment/) on their personal page and is [integrated in the Keras package](https://keras.io/api/datasets/imdb/).
 
 ## Getting started
 
